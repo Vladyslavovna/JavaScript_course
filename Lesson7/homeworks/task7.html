@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<h3>
+		Створити функцію, яка випадковим чином виводить на екран одне із 4 зображень (шляхи до зображень передаються у
+		функцію)
+	</h3>
+	<script>
+		function getImage() {
+			let imageNumber = Math.floor(Math.random() * 4);
+			let image;
+			switch(imageNumber) {
+				case 0:
+					image = `<img src="images/image-1.jpg" alt="#">`
+					break
+				case 1:
+					image = `<img src="images/image-2.jpg" alt="#">`
+					break
+				case 2:
+					image = `<img src="images/image-3.jpg" alt="#">`
+					break
+				case 3:
+					image = `<img src="images/image-4.jpg" alt="#">`
+					break
+			}
+			return image
+		}
+		document.write(getImage())
+	</script>
+</body>
+
+</html>

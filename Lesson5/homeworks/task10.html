@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<h3>
+		Знайти суму всіх непарних чисел, що знаходяться між заданими користувачем числами.
+	</h3>
+	<script>
+		const userMinNum = parseInt(prompt('Введіть початкове число'))
+		const userMaxNum = parseInt(prompt('Введіть максимальне число'))
+		let result = 0
+		for(let i = userMinNum; i <= userMaxNum; i++) {
+			if(i % 2 === 1) {
+				result += 1
+			}
+		}
+		document.write(result)
+	</script>
+</body>
+
+</html>

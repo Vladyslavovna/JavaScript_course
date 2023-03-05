@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<h3>
+		Вивести на екран N абзаців (N вводиться користувачем)
+	</h3>
+	<script>
+		let N = parseInt(prompt('введіть кількість абзаців'))
+		for(let i = 1; i <= N; i++) {
+			document.write(`<h1>Заголовок ${N}</h2>`)
+			for(let j = 1; j <= N; j++) {
+				document.write(`<p>Розділ ${N}, параграф ${j}</p>`)
+			}
+		}
+	</script>
+</body>
+
+</html>

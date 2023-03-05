@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>
+      Випадковим чином генерується число від 1 до 5. Спробуйте вгадати число за
+      2 спроби.
+    </h1>
+    <script>
+      const random = Math.random();
+      const randomNum = Math.round(random * 4);
+      let randomResult = randomNum + 1;
+      let attempt = parseInt(prompt("Спробуйте вгадати число від 1 до 5"));
+
+      if (attempt === randomResult) {
+        document.write("Вітаю з перемогою");
+      } else {
+        attempt = parseInt(prompt("Спробуйте вгадати число від 1 до 5 ще раз"));
+        if (attempt === randomResult) {
+          document.write("Нарешті перемога");
+        } else {
+          document.write("Нажаль ви програли");
+        }
+      }
+    </script>
+  </body>
+</html>

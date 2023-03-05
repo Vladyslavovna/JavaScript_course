@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 2</title>
+</head>
+
+<body>
+	<h1>
+		Дано рік народження (дата: 1 січня) та поточний рік. Знайти кількість років.
+	</h1>
+	<script>
+		let birthdayDate = prompt("Вкажіть Ваш рік народження");
+
+		let currentDate = new Date(); //генерація поточної дати
+
+		let year = currentDate.getFullYear(); //берем рік
+
+		let yearsOld = year - birthdayDate;
+
+		document.write(`
+<h3>Вам ${yearsOld} років.</h3>
+`);
+	</script>
+</body>
+
+</html>

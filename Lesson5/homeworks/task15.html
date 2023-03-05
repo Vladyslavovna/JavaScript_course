@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<h3>
+		Користувача поступово вводить показники температури протягом року. Знайти середню температуру.
+	</h3>
+	<script>
+		// let sumOfTemperature = 0;
+		// let count = 0;
+		// for(let i = 1;)
+
+		//найти сумму температуры за весь год
+		let totalTemperatureNum = 0;
+		for(let i = 1; i <= 12; i++) {
+			let temperatureCounter = parseInt(prompt(` Температура за ${i} місяць`))
+			totalTemperatureNum += temperatureCounter
+		}
+
+		let result = totalTemperatureNum / 12;
+		document.write(`Середня температура за рік ${result.toFixed(2)}`)
+
+	</script>
+</body>
+
+</html>

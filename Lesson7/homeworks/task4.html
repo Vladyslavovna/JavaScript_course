@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<h3>
+		Створити функцію, яка для 3 заданих чисел знаходить одночасно декілька результатів: кількість парних,
+		кількість додатних, кількість більших за 100.
+	</h3>
+	<script>
+		function getResult(num1, num2, num3) {
+			let doubleNum = 0;
+			let positiveNum = 0;
+			let biggerThanHundred = 0;
+
+			if(num1 % 2 === 0) doubleNum++
+			if(num2 % 2 === 0) doubleNum++
+			if(num3 % 2 === 0) doubleNum++
+
+			if(num1 > 0) positiveNum++
+
+			if(num2 > 0) positiveNum++
+
+			if(num3 > 0) positiveNum++
+
+			if(num1 > 100) biggerThanHundred++
+
+			if(num2 > 100) biggerThanHundred++
+
+			if(num3 > 100) biggerThanHundred++
+
+
+			return result = `Кількість парних = ${doubleNum}<br> Кількість додатніх = ${positiveNum}<br> Кількість більших за 100 = ${biggerThanHundred}`
+		}
+
+		const num1 = parseInt(prompt('Введіть перше число'))
+		const num2 = parseInt(prompt('Введіть друге число'))
+		const num3 = parseInt(prompt('Введіть третє число'))
+
+		document.write(getResult(num1, num2, num3))
+	</script>
+</body>
+
+</html>

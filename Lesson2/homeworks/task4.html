@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 4</title>
+</head>
+
+<body>
+	<h1>
+		Дано довжину у сантиметрах. Визначати скільки це метрів і кілометрів.
+
+	</h1>
+	<script>
+		let length = parseFloat(prompt("Вкажіть довжину в сантиметрах"));
+
+		const metersPercent = 0.01;
+
+		let meters = length * metersPercent;
+
+		const kilometersPercent = 0.00001;
+
+		let kilometrs = length * kilometersPercent;
+
+		document.write(`
+<table border="2px">
+  <tr>
+	 <th>Довжина в метрах</th>
+	 <td>${meters}</td>
+  </tr>
+		  <tr>
+	 <th>Довжина в кілометрах</th>
+	 <td>${kilometrs}</td>
+  </tr>
+
+</table>
+`);
+	</script>
+</body>
+
+</html>

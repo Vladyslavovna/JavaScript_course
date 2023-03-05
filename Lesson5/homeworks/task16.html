@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<h3>
+		Користувач поступово вводить прибуток магазину за кожен день протягом N тижнів. Знайти загальну величину
+		прибутку та вивести величину прибутку протягом кожного окремого тижня.
+
+	</h3>
+	<script>
+		let userWeeksN = parseInt(prompt('Введіть кількість тижнів'))
+		let summaryCash = 0;
+		for(let i = 1; i <= userWeeksN; i++) {
+			let totalWeekSellary = 0;
+			for(let j = 1; j <= 7; j++) {
+				let everyDayCash = parseFloat(prompt(`Введіть прибуток ${j} дня ${i} тижня`))
+				totalWeekSellary += everyDayCash
+
+			}
+			summaryCash += totalWeekSellary
+
+			document.write(`Прибуток за тиждень ${i} становить ${totalWeekSellary}<br>`)
+		}
+		document.write(`Загальний прибуток ${summaryCash}`);
+
+	</script>
+</body>
+
+</html>

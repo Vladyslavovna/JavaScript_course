@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Task 3</title>
+</head>
+
+<body>
+	<h1>
+		Дано вартість одиниці товару і кількість. Знайти загальну вартість та ПДВ (5% від загальної вартості).
+
+	</h1>
+	<script>
+
+		let productAmount = parseFloat(prompt("Вкажіть кількість товару"));
+
+		let productPrice = parseFloat(prompt("Вкажіть ціну товару"));
+
+		let totalSum = (productAmount * productPrice).toFixed(2);
+
+		let tallage = 5;
+
+		let productTaxes = ((totalSum / 100) * tallage).toFixed(2);
+
+		document.write(`
+        <table border="2px">
+          <tr>
+              <th>Загальна вартість</th>
+              <td>${totalSum}</td>
+          </tr>
+                    <tr>
+              <th>ПДВ</th>
+              <td>${productTaxes}</td>
+          </tr>
+
+        </table>
+      `)
+	</script>
+</body>
+
+</html>

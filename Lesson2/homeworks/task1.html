@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Taks 1</title>
+</head>
+
+<body>
+	<h1>
+		Знайти суму, добуток та частку двох дійсних чисел. Результат вивести у формі таблиці
+
+	</h1>
+	<script>
+		let a = parseInt(prompt("Введіть значення а", "0"));
+		let b = parseInt(prompt("Введіть значення b", "0"));
+		let numSum = a + b;
+		let numMultiplication = a * b;
+		let numDivision = (a / b).toFixed(2);
+		document.write(`
+        <table border="2px">
+          <tr>
+              <th>Сума</th>
+              <td>${numSum}</td>
+          </tr>
+                    <tr>
+              <th>Добуток</th>
+              <td>${numMultiplication}</td>
+          </tr>
+                    <tr>
+              <th>Частка</th>
+              <td>${numDivision}</td>
+          </tr>
+        </table>
+      `)
+	</script>
+</body>
+
+</html>

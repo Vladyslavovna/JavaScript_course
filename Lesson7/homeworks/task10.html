@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<h3>
+		Дано покази температур (довільна кількість). Розробити функцію, яка дозволить знайти середнє значення для
+		додатних показів температури.
+	</h3>
+	<script>
+		function getAvarageTemperature() {
+			let temperatureCounter = 0;
+			let temperature = 0;
+			let sumOfTemperature = 0;
+			let result;
+
+			let userTemperature = parseInt(prompt('Введіть кількість показників температури'))
+			for(let i = 0; i < userTemperature; i++) {
+				temperature = parseFloat(prompt('Введіть температуру'))
+				if(temperature > 0) {
+					temperatureCounter++
+					sumOfTemperature += temperature
+				}
+				result = sumOfTemperature / temperatureCounter
+			}
+			return document.write(`Середнє значення для додатних показників температур ${(result).toFixed(2)}`)
+		}
+		getAvarageTemperature()
+	</script>
+</body>
+
+</html>

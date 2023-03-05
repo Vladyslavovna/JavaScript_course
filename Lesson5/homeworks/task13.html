@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<h3>
+		Морський бій. Комп’ютер випадково розташовує одиночний корабель на полі розміром N*M. Маючи К снарядів
+		користувач намагається потопити корабель.
+	</h3>
+	<script>
+		//Генерирую поле
+		let rowsX = parseInt(prompt('Введіть кількість рядків X'))
+		let columnsY = parseInt(prompt('Введіть кількість стовпців Y'))
+		//расставляю корабль на поле
+		let shipPositionX = Math.floor(Math.random() * rowsX);
+		let shipPositionY = Math.floor(Math.random() * columnsY);
+		//узнаем количество шотов
+		let userShotsAmount = parseInt(prompt('Введіть кількість пострілів'))
+		//Запускаем цикл для стрельбы по кораблям
+		for(let i = 1; i <= userShotsAmount; i++) {
+			let userShotPositionX = parseInt(prompt('Введіть координати пострілу X'))
+			let userShotPositionY = parseInt(prompt('Введіть координати пострілу Y'))
+			if(userShotPositionX === shipPositionX && userShotPositionY === shipPositionY) {
+				alert('Ви потопили корабель')
+				break;
+			}
+			else {
+				alert('Ви програли.Спробуйте ще раз')
+				break;
+			}
+		}
+	</script>
+</body>
+
+</html>
