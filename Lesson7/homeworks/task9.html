@@ -14,20 +14,25 @@
 		показів температури.
 	</h3>
 	<script>
-		function getTemperature() {
+		function getTemperature(numTemperature) {
 			let temperatureCounter = 0;
 			let temperature;
-			let userTemperature = parseInt(prompt('Введіть кількість показників температури'))
+			// let userTemperature = parseInt(prompt('Введіть кількість показників температури'))
 
-			for(let i = 0; i < userTemperature; i++) {
+			for(let i = 0; i < numTemperature; i++) {
 				temperature = parseFloat(prompt('Введіть температуру'))
 				if(temperature < 0) {
 					temperatureCounter++
 				}
 			}
-			return document.write(`Кількість від’ємних показів температури = ${temperatureCounter}`)
+			return `Кількість від’ємних показів температури = ${temperatureCounter}`
 		}
-		console.log(getTemperature())
+
+		const numTemperature = parseInt(prompt('Введіть кількість показників температури'))
+		const result = getTemperature(numTemperature)
+
+
+		document.write(result)
 	</script>
 </body>
 

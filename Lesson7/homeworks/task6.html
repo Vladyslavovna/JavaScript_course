@@ -15,21 +15,19 @@
 	</h3>
 	<script>
 
-		function getTable(rows, columns) {
+		function getTable(rows, columns, message) {
 			let table = `<table border="2px">`
-			document.write(`<tr>`)
 			for(let i = 0; i < rows; i++) {
-				table +=`<tr>`
-				for(let j = 0; j <columns; j++) {
-					table += `<td> :) </td>`
+				table += `<tr>`
+				for(let j = 0; j < columns; j++) {
+					table += `<td> ${message} </td>`
 				}
-				table += `</tr>`
 			}
 			table += `</table>`
 			return table
 		}
 
-		document.write(getTable(5, 7))
+		document.write(getTable(5, 7, "Hello!"))
 	</script>
 </body>
 

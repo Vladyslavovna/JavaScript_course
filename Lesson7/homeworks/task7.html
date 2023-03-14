@@ -19,19 +19,19 @@
 			let image;
 			switch(imageNumber) {
 				case 0:
-					image = `<img src="images/image-1.jpg" alt="#">`
+					image = `images/image-1.jpg`
 					break
 				case 1:
-					image = `<img src="images/image-2.jpg" alt="#">`
+					image = `images/image-2.jpg`
 					break
 				case 2:
-					image = `<img src="images/image-3.jpg" alt="#">`
+					image = `images/image-3.jpg`
 					break
 				case 3:
-					image = `<img src="images/image-4.jpg" alt="#">`
+					image = `images/image-4.jpg`
 					break
 			}
-			return image
+			return `<img src="${image}" alt="#">`;
 		}
 		document.write(getImage())
 	</script>

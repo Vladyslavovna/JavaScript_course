@@ -14,18 +14,19 @@
 		<!-- переходимо при кліку на зображення (тег img повине знаходитись у середині тега a: <a> <img src=”шлях”> </a> -->
 	</h3>
 	<script>
-		function getBanner() {
-			return document.write(`
+		function getBanner(heading, link, image) {
+			return (`
 			     <h1>
-				Переходь за посиланням
+				${heading}
 				</h1>
 				<br>
-				<a href="https://www.youtube.com">
-					<img src="images/image-3.jpg" alt="#">
+				<a href="${link}">
+					<img src="${image}" alt="#">
 					</a>
 					`)
 		}
-		(getBanner())
+		const banner = getBanner("More doggo", `https://www.youtube.com`, `images/image-4.jpg`);
+		document.write(banner)
 	</script>
 </body>
 
