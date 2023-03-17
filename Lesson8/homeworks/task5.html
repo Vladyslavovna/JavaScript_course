@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<h3>
+		Дано послідовність оцінок учня. Підрахувати кількість:
+		1. двійок
+		2. кількість хороших оцінок (добре, відмінно);
+		3. кількість оцінок, які нижче середнього.
+	</h3>
+
+	<script>
+		//масив оцінок
+		const grades = [10, 11, 9, 12, 8, 10, 11, 12, 7, 10, 12, 9];
+
+		//функція для знаходження двійок у масиві
+
+		function getBadGrades(grades) {
+			let counter = 0
+			for(let i = 0; i < grades.length; i++) {
+				if(grades[i] === 2) {
+					counter++
+				}
+			}
+			return counter
+		}
+
+		const badGrades = getBadGrades(grades)
+
+		console.log(badGrades)
+
+		//функція для знаходження хороших оцінок
+
+		function getBestGrades(grades) {
+			let counter = 0;
+			for(let j = 0; j < grades.length; j++) {
+				if(grades[j] > 8 && grades[j] <= 12) {
+					counter++
+				}
+			}
+			return counter
+		}
+
+		const bestGrades = getBestGrades(grades)
+
+		console.log(bestGrades)
+
+		//функція для знаходження середніх оцінок
+
+		function getGoodGrades(grades) {
+			let counter = 0
+			for(let k = 0; k < grades.length; k++) {
+				if(grades[k] <= 8 && grades[k] > 6) {
+					counter++
+				}
+			}
+			return counter
+		}
+
+		const goodGrades = getGoodGrades(grades)
+
+		console.log(goodGrades)
+
+
+
+	</script>
+</body>
+
+</html>

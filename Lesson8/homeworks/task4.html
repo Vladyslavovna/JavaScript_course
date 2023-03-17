@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<h3>
+		Дано послідовність номерів автомобілів. Підрахувати кількість номерів, які :
+		• починаються на букву «А»;
+		• перша і остання літери співпадають;
+		• складаються з більше ніш 5 символів;
+	</h3>
+
+	<script>
+		//масив з номерами авто
+		let arrayOfCarNumbers = ["ВІ3456АІ", "АМ5678ВС", "АМ5678ВС", "ВЕ4321НЕ", "КА1234НА", "НІ5555МА", "ОР7777АС", "ТУ2468ВТ", "ХА0987СА", "ХО3210ХО"];
+
+		//фунція для пошуку номерів які почитаються на літеру А
+
+		function getNumbersWithA(arrayOfCarNumbers) {
+			let counter = 0;
+			for(let i = 0; i < arrayOfCarNumbers.length; i++) {
+				if(arrayOfCarNumbers[i][0] === 'А') {
+					counter++
+				}
+			}
+			return counter
+		}
+		const result = getNumbersWithA(arrayOfCarNumbers)
+
+		console.log(result)
+
+		//функція для пошуку номерів де перша і остання літери співпадають
+
+		function getSameLetter(arrayOfCarNumbers) {
+			let counter = 0;
+			for(let j = 0; j < arrayOfCarNumbers.length; j++) {
+				if(arrayOfCarNumbers[j][0] === arrayOfCarNumbers[j][7]) {
+					counter++
+				}
+			}
+			return counter
+		}
+
+		const sameLetter = getSameLetter(arrayOfCarNumbers)
+
+		console.log(sameLetter)
+
+		//функція для пошуку номерів в яких більше 5-ти символів
+
+		function getBiggerThanFive(arrayOfCarNumbers) {
+			let counter = 0;
+			for(let k = 0; k < arrayOfCarNumbers.length; k++) {
+				if(arrayOfCarNumbers[k].length > 5) {
+					counter++
+				}
+			}
+			return counter
+		}
+
+		const biggerThanFive = getBiggerThanFive(arrayOfCarNumbers)
+
+		console.log(biggerThanFive)
+
+	</script>
+</body>
+
+</html>

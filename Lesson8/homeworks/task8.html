@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<h3>
+		Дано одновимірний масив, у якому зберігається певна виграшна сума (елементи заповнюються випадковим чином
+		значеннями від -500 до 500). Надаючи користувачу можливість вибирати номери елементів (поки він не
+		відмовиться). Знаходити сумарний виграш.
+	</h3>
+	<script>
+
+		//функція для генерації рандомного числа
+
+		function generateRandomNum(num) {
+			let arrayOfNums = []
+			for(let i = 0; i < num; i++) {
+				arrayOfNums.push(Math.floor(Math.random() * 1001) - 500)
+			}
+			return arrayOfNums
+		}
+
+		//функція лотореї
+
+		function getPrize(lottery) {
+			let sum = 0,
+				userAnswer
+
+			do {
+				userAnswer = parseInt(prompt('Введіть номер елементу'))
+
+				if(!userAnswer) {
+					break;
+				}
+
+				sum += lottery[userAnswer]
+
+				alert(`Ваш виграш ${sum}`)
+
+			} while(userAnswer)
+
+			return sum
+		}
+
+		const randomNum = generateRandomNum(10)
+
+		const userPrice = getPrize(randomNum)
+
+		alert(`Ваш виграш ${userPrice}`)
+
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<h3>
+		Дано масив, який зберігає кількість відвідувачів магазину протягом тижня. Вивести на екран:
+
+		номери днів, протягом яких кількість відвідувачів була меншою за 20;
+
+		номери днів, коли кількість відвідувачів була мінімальною;
+
+		номери днів, коли кількість відвідувачів була максимальною;
+
+		загальну кількість клієнтів у робочі дні та окремо загальну кількість днів на вихідних.
+
+
+	</h3>
+	<script>
+
+		//функція для вводу кількості відвідувачів у массив за тиждень
+
+		function getAmountOfVisitors() {
+			let arrayOfVisitors = []
+			for(let i = 0; i < 7; i++) {
+				let visitors = parseInt(prompt(`Введіть кількість відвідувачів за ${i + 1} день`))
+				arrayOfVisitors.push(visitors)
+			}
+			return arrayOfVisitors
+		}
+
+		const amountOfVisitors = getAmountOfVisitors()
+
+		//функція для пошуку днів коли  кількість відвідувачів була менша за 20
+
+		function getDaysVisitorsLessThan_20(amountOfVisitors) {
+			let result = []
+			for(let j = 0; j < 7; j++) {
+				if(amountOfVisitors[j] < 20) {
+					result.push(j + 1)
+				}
+			}
+			return result
+		}
+		const daysVisitorsLessThan_20 = (getDaysVisitorsLessThan_20(amountOfVisitors))
+
+		document.write(`${daysVisitorsLessThan_20}<br>`)
+
+		//функція для пошуку днів коли кількість відвідувачів була мінімальною
+
+		function getMinVisitorsDay(amountOfVisitors) {
+			let resultMinVisitors = []
+			let minVisitors = amountOfVisitors[0]
+			for(let k = 0; k < amountOfVisitors.length; k++) {
+				if(amountOfVisitors[k] < minVisitors) {
+					resultMinVisitors = [k + 1]
+				}
+			}
+			return resultMinVisitors
+		}
+
+		const minVisitorsDay = getMinVisitorsDay(amountOfVisitors)
+
+		document.write(`${minVisitorsDay}<br>`)
+
+		//функція для пошуку днів коли кількість відвідувачів була максимальною
+
+		function getMaxVisitorsDay(amountOfVisitors) {
+			let resultMaxVisitors = []
+			let maxVisitors = amountOfVisitors[0]
+			for(let g = 0; g < amountOfVisitors.length; g++) {
+				if(amountOfVisitors[g] > maxVisitors) {
+					maxVisitors = amountOfVisitors[g]
+					resultMaxVisitors[g + 1]
+				} else if(amountOfVisitors[g] === maxVisitors) {
+					resultMaxVisitors.push(g + 1)
+				}
+			}
+			return resultMaxVisitors
+		}
+
+		const maxVisitorsDay = getMaxVisitorsDay(amountOfVisitors)
+
+		document.write(`${maxVisitorsDay}<br>`)
+
+		//функція для знаходження загальної кількості клієнтів у робочі дні 
+
+		function getSumOfVisitorsWorkingDay(amountOfVisitors) {
+			let sum = 0
+			for(let f = 0; f < 5; f++) {
+				sum += amountOfVisitors[f]
+			}
+			return sum
+		}
+		const sumOfVisitorsWorkingDay = getSumOfVisitorsWorkingDay(amountOfVisitors)
+
+		document.write(`${sumOfVisitorsWorkingDay}<br>`)
+
+		//функція для знаходження загальної кількості клієнтів у вихідні
+
+		function getSumOfWeekendDay(amountOfVisitors) {
+			let sum = 0;
+			for(let d = 5; d <= 6; d++) {
+				sum += amountOfVisitors[d];
+			}
+			return sum;
+		}
+
+		const sumOfWeekendDay = getSumOfWeekendDay(amountOfVisitors);
+
+		document.write(`${sumOfWeekendDay}<br>`)
+
+
+
+
+	</script>
+</body>
+
+</html>

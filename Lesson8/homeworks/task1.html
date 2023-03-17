@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<h3>
+		Дано масив, який містить оцінки з К предметів. Знайти середній бал і з’ясувати до якої категорії він
+		відноситься (відмінник, двійочник (має хоча би одну двійку), хорошист (оцінки добре і відмінно), трійочник(є
+		хоча би одна трійка)).
+	</h3>
+	<script>
+
+		//функція для створення массиву оцінок
+
+		function getPupilScore() {
+			const amountOfSubjects = parseInt(prompt('Введіть кількість предметів К'))
+			let arrOfScores = []
+			for(let i = 0; i < amountOfSubjects; i++) {
+				let score = parseInt(prompt(`Введіть оцінку за ${i + 1} предмет`))
+				arrOfScores.push(score)
+			}
+			return arrOfScores
+		}
+
+		let result = getPupilScore()
+
+
+		//функція для обчислення середньої оцінки учня
+
+		function getAverageScore(result) {
+			let sumOfScores = 0;
+			for(let j = 0; j < arrOfScores.length; j++) {
+				sumOfScores += arrOfScores[j]
+			}
+			let avarageScore = sumOfScores / arrOfScores.length
+
+			return avarageScore
+		}
+
+		const avarageScore = (getAverageScore(result))
+
+		//функція для знаходження успішності учня
+
+		// function getPupilSuccess(result) {
+		// 	let successResult = ""
+		// 	const resultOfAvarageScore = getAverageScore(arrOfScores)
+		// 	if(resultOfAvarageScore <= 3) {
+		// 		successResult = "Двійочник"
+		// 	} else if(resultOfAvarageScore >= 4 && resultOfAvarageScore < 7) {
+		// 		successResult = "Трійочник"
+		// 	} else if(resultOfAvarageScore >= 7 && resultOfAvarageScore <= 9) {
+		// 		successResult = "Хорошист"
+		// 	} else(
+		// 		successResult = "Відмінник"
+		// 	)
+
+		// 	return successResult
+		// }
+
+		function getPupilSuccess(result) {
+			const minScore = Math.min(...result)
+			let successResult
+			switch(minScore) {
+				case 2:
+					successResult = 'Двійочник'
+					break;
+				case 3:
+				case 4:
+				case 5:
+					successResult = 'Трійочник'
+					break;
+				case 6:
+				case 7:
+				case 8:
+					successResult = 'Хорошист'
+				default:
+					successResult = 'Відмінник'
+					break;
+			}
+			return successResult
+		}
+
+		const pupilSuccess = (getPupilSuccess(result))
+
+		document.write(`Середній бал учня ${avarageScore} <br>`)
+		document.write(`Категорія учня ${pupilSuccess}`)
+
+	</script>
+</body>
+
+</html>

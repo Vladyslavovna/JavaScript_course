@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<h3>
+		Дано послідовність цін товарів та назв (у окремих масивах). Вивести на екран ті, які може собі дозволити
+		користувач (кількість грошей задається).
+	</h3>
+
+	<script>
+		const productsPrices = [1000, 20, 31]
+
+		const productsTitles = ["cheese", "juice", "bread"]
+
+		const userMoneyAmount = parseFloat(prompt('Скільки у Вас є грошей?'))
+
+		function getProducts(productsPrices, productsTitles) {
+			let affordableProducts = []
+
+			for(let i = 0; i < productsPrices.length; i++) {
+				if(productsPrices[i] <= userMoneyAmount) {
+					affordableProducts.push(productsTitles[i])
+				}
+			}
+			return affordableProducts
+
+		}
+
+		let result = getProducts(productsPrices, productsTitles)
+		document.write(result)
+
+
+
+	</script>
+</body>
+
+</html>

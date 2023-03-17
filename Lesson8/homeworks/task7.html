@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<h3>
+		Дано послідовність платіжок протягом року. Знайти сумарну кількість грошей за:
+		за весь рік;
+		у першій половині року;
+		у другій половині року;
+		за літо;
+		за ІІ квартал;
+		за парні місяці (з парними номерами);
+		за місяці, які є початковими у сезоні (весна, літо, осінь, зима).
+
+	</h3>
+
+	<script>
+		//функція для введеня платіжок протягом року
+
+		function getBills(billsCount) {
+			let arrayOfBills = []
+			for(let j = 0; j < billsCount; j++) {
+				const monthBill = parseFloat(prompt(`Введіть суму платежу за ${j + 1} місяць`))
+				arrayOfBills.push(monthBill)
+			}
+			return arrayOfBills
+		}
+
+		//функція для знаходження сумарної кількості
+
+		function getSumOfBills(incomeList, startMonth, endMonth) {
+			let sum = 0;
+			for(let i = startMonth; i <= endMonth; i++) {
+				sum += incomeList[i - 1]
+			}
+			return sum
+		}
+
+		const incomeList = getBills(12)
+
+		//загальна сумма за рік
+
+		const sumOfBillsForYear = getSumOfBills(incomeList, 1, 12)
+
+
+		//сума за перше півріччя
+
+		const sumOfBillsFirstHulfOfYear = getSumOfBills(incomeList, 1, 6)
+
+		//сума за друг півріччя 
+
+		const sumOfBillsSecondHulfOfYear = getSumOfBills(incomeList, 7, 12)
+
+		//сума за літо 
+
+		const sumOfBillsOfSummer = getSumOfBills(incomeList, 6, 8)
+
+		//сума за другий квартал
+
+		const sumOfSecondQuarter = getSumOfBills(incomeList, 4, 6)
+
+		//функція для знаходження сумми у парні місяці 
+
+		function getEvenMonthSum(bills) {
+			let sum = 0;
+			for(let k = 2; k <= 12; k += 2) {
+				sum += bills[k - 1]
+			}
+			return sum
+		}
+		const sumOfEvenMonth = getEvenMonthSum(incomeList)
+
+		//функція для знаходження сумми у місяці,які є початковими в сезоні
+
+		function getStartSeasonMonthSum(bills) {
+			let sum = 0
+			for(let g = 0; g < 12; g += 3) {
+				sum += bills[g]
+			}
+			return sum
+		}
+
+		const startSeasonMonthSum = getStartSeasonMonthSum(incomeList)
+
+
+
+	</script>
+</body>
+
+</html>

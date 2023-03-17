@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<h3>
+		Дано масив імен учнів. З’ясувати скільки разів зустрічається ім’я «Іван».
+	</h3>
+
+	<script>
+
+		//функція для введеня імен у массив
+
+		function getNames(amountOfNames) {
+			let arrayOfNames = []
+			for(let i = 0; i < amountOfNames; i++) {
+				let names = prompt('Введіть ім"я')
+				arrayOfNames.push(names)
+			}
+			return arrayOfNames
+		}
+
+		const allNames = getNames(7)
+
+		//функція для пошуку Івана у массиві
+
+		function findName(allNames) {
+			let nameCounter = 0
+			for(let j = 0; j < allNames.length; j++) {
+				if(allNames[j] === "Іван")
+					nameCounter++
+			}
+			return nameCounter
+		}
+
+		const result = findName(allNames)
+
+		document.write(result)
+	</script>
+</body>
+
+</html>
