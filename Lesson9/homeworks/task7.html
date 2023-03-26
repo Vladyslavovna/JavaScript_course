@@ -19,7 +19,7 @@
 		arrayOfPrices.forEach(
 			(element, index, baseArrRef) => {
 				if(element > 1000)
-					arrayOfPrices[index] *= 0.3
+				baseArrRef[index] *= 0.3
 			}
 		)
 
