@@ -34,15 +34,29 @@
 		//функція для генерування кораблів
 
 		function generateShipPlacement(boardSize, shipsAmount) {
-			const generatedBoard = getTableBoard(boardSize)
+			const generatedBoard = getTableBoard(boardSize);
+			const generatedPosition = [];
+			let found
 			for(let j = 0; j < shipsAmount; j++) {
-				const shipsPosition = Math.floor(Math.random() * boardSize)
-				generatedBoard[shipsPosition] = 1
+				let shipsPosition;
+				do {
+					shipsPosition = Math.floor(Math.random() * boardSize);
+					found = false;
+					for(let i = 0; i < generatedPosition.length; i++) {
+						if(generatedPosition[i] === shipsPosition) {
+							found = true;
+							break;
+						}
+					}
+				} while(found);
+				generatedPosition.push(shipsPosition);
+				generatedBoard[shipsPosition] = 1;
 			}
-			return generatedBoard
+			return generatedBoard;
 		}
 
-		const boardWithShips = generateShipPlacement(boardSize, shipsAmount)
+		const boardWithShips = generateShipPlacement(boardSize, shipsAmount);
+
 
 		//функція гри
 

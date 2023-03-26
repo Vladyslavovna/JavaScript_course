@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Завдання 2</title>
+</head>
+
+<body>
+	<h2>
+		Завдання 2
+	</h2>
+	<h3>
+		Користувач вводить кількість елементів. Створити масив, у якому перша половина заповнена 1-цями, а друга
+		заповнена 7-ками.
+	</h3>
+
+	<script>
+
+		function getFilledArray() {
+			const userElementsAmount = parseInt(prompt('Введіть кількість елементів', '10'))
+
+			const filledArray = new Array(userElementsAmount)
+
+			let middle = Math.floor(userElementsAmount / 2)
+
+			filledArray.fill(1, 0, middle)
+
+			filledArray.fill(7, middle)
+
+			return filledArray
+		}
+
+		let result = getFilledArray()
+
+		console.log(result)
+
+	</script>
+</body>
+
+</html>

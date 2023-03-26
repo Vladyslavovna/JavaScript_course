@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Дз №10</title>
+</head>
+
+<body>
+	<h2>Дз №10</h2>
+	<h3>Дано історію цін на цінні папери за деякий період (згенерувати від 1 до 10000)</h3>
+	<script>
+
+		//=================== Функція для генерації історії цін на цінні папери за деякий період (я зробила за 12 місяців)==============
+
+		function getHistoryOfBills(months) {
+			const arrayOfBills = []
+			for(let i = 0; i < months; i++) {
+				const randomNum = Math.floor(Math.random() * 10000) + 1
+				arrayOfBills.push(randomNum)
+			}
+			return arrayOfBills
+		}
+
+		const bills = getHistoryOfBills(12)
+
+		console.log(`Історія цін на цінні папери за 12 місяців :${bills}`)
+
+
+		//1.Сформувати новий масив, у якому є тільки ті, що більші за 1000 грн.
+
+		const billsGraterThan1000 = bills.filter(bill => bill > 1000)
+
+		console.log(`Ціни більші за 1000: ${billsGraterThan1000}`)
+
+		//2.Сформувати новий масив, у якому є номери тільки тих, що більші за 1000 грн.
+
+		const indexesOfBillsGraterThan1000 = bills.reduce((numbers, bill, index) => {
+			if(bill > 1000)
+				numbers.push(index)
+			return numbers
+		}, []
+		)
+		console.log(`Індекси більших за 1000: ${indexesOfBillsGraterThan1000}`)
+
+		//3.Сформувати список з тих цін, які більші за попереднє значення
+
+		const billsGraterThanPrivious = bills.reduce((totalBills, currentBill, index) => {
+			if(index > 0 && currentBill > bills[index - 1]) {
+				totalBills.push(currentBill)
+			}
+			return totalBills
+		}, []
+
+		)
+
+		console.log(`Список цін,які більші за попереднє значення: ${billsGraterThanPrivious}`)
+
+		//4.Сформувати новий масив, що міститиме значення цін у відсотках стосовно максимального
+
+		//=======Максимальний елемент масиву============
+
+		const maxBill = Math.max(...bills)
+
+		console.log(`Максимальна ціна: ${maxBill}`)
+
+		const billsInPercents = bills.map(bill => ((bill / maxBill) * 100).toFixed(2))
+
+		console.log(`Значення цін у відсотках стосовно максимального: ${billsInPercents}`)
+
+		//5.Підрахувати кількість змін цін
+
+		const changesOfBillsInArray = bills.reduce((prevBills, currentBill, index) => {
+			if(index !== 0 && currentBill !== bills[index - 1]) {
+				return prevBills + 1
+			}
+			else {
+				return prevBills
+			}
+		}, 0)
+
+		console.log(`Кількість змін цін: ${changesOfBillsInArray}`)
+
+		//6.Визначити, чи є ціна, що менше 1000
+
+		const isThereBillLessThan1000 = bills.some(bill => bill < 1000)
+
+		if(isThereBillLessThan1000) {
+			console.log('Є ціна менша за 1000');
+		} else {
+			console.log('Цін менше за 1000 немає');
+		}
+
+		//7.Визначати, чи усі ціни більше за 1000
+
+		const isAllBillsGraterThan1000 = bills.every(bill => bill > 1000)
+
+		if(isAllBillsGraterThan1000) {
+			console.log('Усі ціни більші за 1000')
+		} else {
+			console.log('Не усі ціни більші за 1000')
+		}
+
+		//8.Підрахувати кількість цін, що більше за 1000
+
+		const amountOfBillsGraterThan1000 = bills.reduce(
+			(prevBill, element) =>
+				element > 1000 ? prevBill + 1 : prevBill,
+			0
+		)
+
+		console.log(`Кількість цін більших за 1000: ${amountOfBillsGraterThan1000}`)
+
+		//9.Підрахувати суму цін, що більше за 1000
+
+		const sumOfBillsGraterThan1000 = bills.reduce((prevSum, currentBill) =>
+			(currentBill > 1000 ? prevSum + currentBill : prevSum)
+			, 0)
+
+		console.log(`Сума цін білше за 1000: ${sumOfBillsGraterThan1000}`)
+
+		//10.Знайти першу ціну, що більше за 1000
+
+		const firstBillGraterThan1000 = bills.find(el => el > 1000)
+
+		console.log(`Перша ціна яка більша за 1000: ${firstBillGraterThan1000}`)
+
+		//11.Знайти індекс першої ціни, що більше за 1000
+
+		const indexOfFirstBillGraterThan1000 = bills.findIndex(el => el > 1000)
+
+		console.log(`Індекс першої ціни,що більше за 1000: ${indexOfFirstBillGraterThan1000}`)
+
+		//12.Знайти останню ціну, що більше за 1000
+
+		const lastBillGraterThan1000 = bills.findLast(el => el > 1000)
+
+		console.log(`Остання ціна,що більше за 1000: ${lastBillGraterThan1000}`)
+
+		//13.Знайти індекс останньої ціни, що більше за 1000
+
+		const indexOfTheLastBillGraterThan1000 = bills.findLastIndex(el => el > 1000)
+
+		console.log(`Індекс останньої ціни,що більше за 1000: ${indexOfTheLastBillGraterThan1000}`)
+
+	</script>
+</body>
+
+</html>
