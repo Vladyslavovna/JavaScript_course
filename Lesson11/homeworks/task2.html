@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Завдання 2</title>
+</head>
+
+<body>
+	<h2>
+		Завдання 2
+	</h2>
+	<h3>
+		Дано інформацію про прибуток К магазинів протягом тижня. Знайти :
+
+		1) загальний прибуток кожного масиву за тиждень;
+
+		2) загальний прибуток усіх магазинів по дням (загальний прибуток усіх магазинів за понеділок, за вівторок, і
+		т.д.);
+
+		3) загальний прибуток за робочі дні
+
+		4) загальний прибуток за вихідні дні
+
+		5) максимальний прибуток за середу
+
+		6) сформувати загальний список (одновимірний масив) зі значенням, які що більші за 200
+
+		7) відсортувати кожен тиждень за зростанням
+
+		8) відсортувати тижні (рядки) за спаданням максимального елементи у цьому тижні (рядку), тобто при порівнянні
+		рядків потрібно порівнювати максимальні елементи у кожному з цих рядків
+
+		8) упорядкувати тижні (рядки) за спаданням суми елементів у рядку (тобто при порівнянні двох рядків треба
+		знайти суму кожного з рядків і порівнювати ці суми, на основі цих сум буде зрозуміло, який з елементів повинен
+		іти раніше).
+	</h3>
+
+	<script>
+
+		//функція для генерації інформації про прибуток магазинів
+
+		function getUserShopsAmount() {
+			const k = parseInt(prompt('Введіть кількість магазинів'))
+			const arrayOfProfitsFromAllShops = []
+			for(let i = 0; i < k; i++) {
+				const profitOfOneShopPerWeek = []
+				for(let j = 0; j < 7; j++) {
+					profitOfOneShopPerWeek.push(Math.floor(Math.random() * 500))
+				}
+				arrayOfProfitsFromAllShops.push(profitOfOneShopPerWeek)
+			}
+			return arrayOfProfitsFromAllShops
+		}
+
+		const profitsFromAllShops = getUserShopsAmount()
+
+		console.log(profitsFromAllShops)
+
+		//1.загальний прибуток кожного масиву за тиждень
+
+		function getSumOfProfitOfEveryShop(profitsFromAllShops) {
+			const generalSum = []
+			for(let i = 0; i < profitsFromAllShops.length; i++) {
+				let sumOfProfitFromOneShop = 0
+				for(let j = 0; j < profitsFromAllShops[i].length; j++) {
+					sumOfProfitFromOneShop += profitsFromAllShops[i][j]
+				}
+				generalSum.push(sumOfProfitFromOneShop)
+			}
+			return generalSum
+		}
+
+		const profitOfEveryShopPerWeek = getSumOfProfitOfEveryShop(profitsFromAllShops)
+
+		console.log(profitOfEveryShopPerWeek)
+
+		//2.загальний прибуток усіх магазинів по дням (загальний прибуток усіх магазинів за понеділок, за вівторок, і т.д.);
+
+		function getProfitByDays(profitsFromAllShops) {
+			const generalSum = []
+			for(let i = 0; i < profitsFromAllShops[0].length; i++) {
+				let sumOfOneDay = 0
+				for(let j = 0; j < profitsFromAllShops.length; j++) {
+					sumOfOneDay += profitsFromAllShops[j][i]
+				}
+				generalSum.push(sumOfOneDay)
+			}
+			return generalSum
+		}
+
+		const profitsByDays = getProfitByDays(profitsFromAllShops)
+
+		console.log(profitsByDays)
+
+		//3.загальний прибуток за робочі дні
+
+		function getProfitByDays(profitsFromAllShops, startDay, endDay) {
+			const generalSum = []
+			for(let i = startDay; i < endDay; i++) {
+				let sumOfOneDay = 0
+				for(let j = 0; j < profitsFromAllShops.length; j++) {
+					sumOfOneDay += profitsFromAllShops[j][i]
+				}
+				generalSum.push(sumOfOneDay)
+			}
+			return generalSum
+		}
+
+		const profitsOfWorkingDays = getProfitByDays(profitsFromAllShops, 0, 4)
+
+		console.log(profitsOfWorkingDays)
+
+		//4.загальний прибуток за вихідні дні
+
+		const profitsOfWeekendDays = getProfitByDays(profitsFromAllShops, 5, 6)
+
+		console.log(profitsOfWeekendDays)
+
+		//5.Максимальний прибуток за середу (потрібно спочатку знайти максимальне мас макс)
+
+		function getMaxFromWednesday(profitsFromAllShops) {
+
+			let maxOfWednesday = profitsFromAllShops[0][2]
+
+			for(let i = 0; i < profitsFromAllShops.length; i++) {
+				if(profitsFromAllShops[i][2] > maxOfWednesday) {
+					maxOfWednesday = profitsFromAllShops[i][2]
+				}
+			}
+			return maxOfWednesday
+		}
+
+		const maxProfitOnWednesday = getMaxFromWednesday(profitsFromAllShops)
+
+		console.log(maxProfitOnWednesday)
+
+		//6.Сформувати загальний список (одновимірний масив) зі значенням, які що більші за 200
+
+		function getPricesGraterThan200(profitsFromAllShops) {
+			let arrayOfPrices = []
+
+			for(let i = 0; i < profitsFromAllShops.length; i++) {
+				for(let j = 0; j < profitsFromAllShops[i].length; j++) {
+					if(profitsFromAllShops[i][j] > 200)
+						arrayOfPrices.push(profitsFromAllShops[i][j])
+				}
+			}
+			return arrayOfPrices
+		}
+
+		const pricesGraterThan200 = getPricesGraterThan200(profitsFromAllShops)
+
+		console.log(pricesGraterThan200)
+
+		//7.відсортувати кожен тиждень за зростанням
+
+		function sortArrayOfProfits(profitsFromAllShops) {
+			let sorterArray = []
+			for(let i = 0; i < profitsFromAllShops.length; i++) {
+				profitsFromAllShops[i].sort((a, b) => a - b)
+				sorterArray.push(profitsFromAllShops[i])
+			}
+			return sorterArray
+		}
+
+		const arrayOfProfitsSortedGrate = sortArrayOfProfits(profitsFromAllShops)
+
+		console.log(arrayOfProfitsSortedGrate)
+
+
+		//8.відсортувати тижні (рядки) за спаданням максимального елементи у цьому тижні (рядку), тобто при порівнянні рядків потрібно порівнювати максимальні елементи у кожному з цих рядків
+
+		const sortedArrOfRows = profitsFromAllShops.sort((a, b) => {
+			a = Math.max(...a)
+			b = Math.max(...b)
+			return a > b ? -1 : 1
+		})
+
+		console.log(sortedArrOfRows)
+
+		//9.упорядкувати тижні (рядки) за спаданням суми елементів у рядку (тобто при порівнянні двох рядків треба знайти суму кожного з рядків і порівнювати ці суми, на основі цих сум буде зрозуміло, який з елементів повинен іти раніше).
+
+		function getSortedArrayBySumDesc(profitsFromAllShops) {
+			for(let i = 0; i < profitsFromAllShops.length; i++) {
+				let sum = 0
+				for(let j = 0; j < profitsFromAllShops[i].length; j++) {
+					sum += profitsFromAllShops[i][j]
+				}
+				profitsFromAllShops[i].push(sum)
+			}
+			profitsFromAllShops.sort((a, b) =>
+				b[b.length - 1] - a[a.length - 1]
+			)
+			return profitsFromAllShops
+		}
+
+		const result = getSortedArrayBySumDesc(profitsFromAllShops)
+
+		console.log(result)
+
+	</script>
+</body>
+
+</html>

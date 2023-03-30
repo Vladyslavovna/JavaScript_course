@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Завдання 3</title>
+</head>
+
+<body>
+	<h2>Завдання 2</h2>
+	<h3>Морський бій. Випадковим чином на двовимірному полі розміром 6*6 розташовується 5 кораблів. Користувач стріляє
+		вказуючи координати. Гра продовжується поки не потоплено усі кораблі або у користувача не закінчаться снаряди.
+	</h3>
+	<script>
+
+		//1.Створення ігрового поля,заповненого нулями
+
+		function getBattleField(rows, columns) {
+			let arr = new Array(rows)
+			for(let i = 0; i < rows; i++) {
+				arr[i] = new Array(columns).fill(0)
+			}
+			return arr
+		}
+
+		let battleField = getBattleField(6, 6)
+
+		//2.Створення функції для генерації рандомного розташування кораблів
+
+		function getShipsPlacement(battleField) {
+			let ships = []
+			for(let i = 0; i < 5; i++) {
+				let rowsIndex,
+					columnsIndex
+				do {
+
+					rowsIndex = Math.floor(Math.random() * battleField.length)
+					columnsIndex = Math.floor(Math.random() * battleField[0].length)
+				} while(battleField[rowsIndex][columnsIndex] !== 0)
+				ships.push([rowsIndex, columnsIndex])
+				battleField[rowsIndex][columnsIndex] = 1
+			}
+			return ships
+		}
+
+		const placeOfShips = getShipsPlacement(battleField)
+
+		// console.log(battleField)
+
+		//3.Гра користувача
+
+		function game() {
+			let amountOfshots = 10
+			let amountOfHits = 0
+
+			do {
+				let row = parseInt(prompt('Введіть координати пострілу по осі Х'))
+				let col = parseInt(prompt('Введіть координати пострілу по осі У'))
+
+				if(battleField[row][col] === 1) {
+					alert('Ви влучили в корабель')
+					amountOfHits++
+					battleField[row][col] = -1
+				}
+				else if(battleField[row][col] === -1) {
+					alert('Корабель в цій позиції вже потоплений')
+				}
+				else {
+					alert('Промах')
+					battleField[row][col] = -1
+				}
+				amountOfshots--
+			} while(amountOfshots > 0 && amountOfHits < 5)
+
+			if(amountOfHits === 5) {
+				alert('Вітаю з перемогою')
+			} else {
+				alert('Нажаль,ви програли')
+			}
+		}
+
+		game()
+
+	</script>
+</body>
+
+</html>

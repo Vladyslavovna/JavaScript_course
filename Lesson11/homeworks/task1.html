@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Завдання 1</title>
+</head>
+
+<body>
+	<h2> Знайти суми елементів у вказаній області</h2>
+
+	<script>
+		const mainArray = [
+			[1, 10, 6],
+			[2, 7, 9],
+			[6, 11, 4],
+			[5, 4, 2]
+		]
+
+		//1.
+
+		let sumOfFirstTask = 0
+
+		for(let rowIndex = 0; rowIndex <= 1; rowIndex++) {
+			for(let colIndex = 0; colIndex <= 1; colIndex++) {
+				sumOfFirstTask += mainArray[rowIndex][colIndex]
+			}
+		}
+
+		console.log(sumOfFirstTask)
+
+		//2.
+
+		let sumOfSecondTask = 0
+
+		for(let rowIndex = 0; rowIndex <= 1; rowIndex++) {
+			for(let colIndex = 1; colIndex <= 2; colIndex++) {
+				sumOfSecondTask += mainArray[rowIndex][colIndex]
+			}
+		}
+
+		console.log(sumOfSecondTask)
+
+		//3.
+
+		let sumOfThirdTask = 0
+
+		for(let rowIndex = 2; rowIndex <= 3; rowIndex++) {
+			for(let colIndex = 0; colIndex <= 1; colIndex++) {
+				sumOfThirdTask += mainArray[rowIndex][colIndex]
+			}
+		}
+
+		console.log(sumOfThirdTask)
+
+		//4.
+		let sumOfFourthTask = 0
+
+		for(let rowIndex = 2; rowIndex <= 3; rowIndex++) {
+			for(let colIndex = 1; colIndex <= 2; colIndex++) {
+				sumOfFourthTask += mainArray[rowIndex][colIndex]
+			}
+		}
+
+		console.log(sumOfFourthTask)
+
+		//p.s у цих завданнях намагалась використовувати .length замість чисел,але не розумію як це використовувати саме у цих випадках
+
+		//5.Суму парних рядків
+
+		let sumOfFifthTask = 0
+
+		for(let rowIndex = 0; rowIndex < mainArray.length; rowIndex += 2) {
+			for(let colIndex = 0; colIndex < mainArray[rowIndex].length; colIndex++) {
+				sumOfFifthTask += mainArray[rowIndex][colIndex]
+			}
+		}
+
+		console.log(sumOfFifthTask)
+
+		//6.Суму непарних стовпців
+		let sumOfSixthTask = 0
+
+		for(let rowIndex = 0; rowIndex < mainArray.length; rowIndex++) {
+			for(let colIndex = 1; colIndex < mainArray[rowIndex].length; colIndex += 2) {
+				sumOfSixthTask += mainArray[rowIndex][colIndex]
+			}
+		}
+
+		console.log(sumOfSixthTask)
+
+		//7.У парних рядках – непарні стовпці, у непарних – парні.
+
+		//Сумма у парних рядках непарних стовпців
+
+		let sumOfEvenRows = 0
+
+		for(let rowIndex = 0; rowIndex < mainArray.length; rowIndex += 2) {
+			for(let colIndex = 1; colIndex < mainArray[rowIndex].length; colIndex += 2)
+				sumOfEvenRows += mainArray[rowIndex][colIndex]
+		}
+
+		console.log(sumOfEvenRows)
+
+		//Сумма у непарних рядках парних стовпців
+
+		let sumOfOddRows = 0
+
+		for(let rowIndex = 1; rowIndex < mainArray.length; rowIndex += 2) {
+			for(let colIndex = 0; colIndex < mainArray[rowIndex].length; colIndex += 2)
+				sumOfOddRows += mainArray[rowIndex][colIndex]
+		}
+
+		console.log(sumOfOddRows)
+
+	</script>
+</body>
+
+</html>
