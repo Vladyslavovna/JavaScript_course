@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Завдання 5</title>
+</head>
+
+<body>
+	<h2>
+		Завдання 5
+	</h2>
+	<h3>
+		Дано масив імен. Застосовуючи відповідне сортування та бінарний пошук визначити, чи є у масиві ім’я «Olga» і
+		під яким індексом.
+	</h3>
+	<script>
+		const names = ['Emma', 'Olivia', 'Ava', 'Isabella', 'Sophia', 'Charlotte', 'Olga', 'Mia', 'Amelia', 'Harper', 'Evelyn']
+
+		const sortedNames = names.sort()
+
+		console.log(sortedNames)
+
+		//1.Функція для пошуку Ольги у масиві
+		function isNameIncludesInArray(arr) {
+			let start = 0
+			let end = arr.length - 1
+
+			while(start <= end) {
+				const middle = Math.floor((start + end) / 2)
+
+				if(arr[middle] === 'Olga') return true
+				if(arr[middle] < 'Olga') start = middle + 1
+				if(arr[middle > 'Olga']) end = middle - 1
+			}
+			return false
+		}
+
+		if(isNameIncludesInArray(sortedNames)) console.log('Ім"я Ольга є у масиві')
+		else console.log('Такого імені немає')
+
+		//2.Функція для знаходження індексу Ольги
+
+		function getIndexOfNameInArray(arr) {
+			let start = 0
+			let end = arr.length - 1
+
+			while(start <= end) {
+				const middle = Math.floor((start + end) / 2)
+
+				if(arr[middle] === 'Olga') return middle
+				if(arr[middle] < 'Olga') start = middle + 1
+				if(arr[middle > 'Olga']) end = middle - 1
+			}
+			return -1
+		}
+
+		const indexOfOlga = getIndexOfNameInArray(sortedNames, 'Olga')
+		if(indexOfOlga !== -1) console.log(`Індекс імені Ольга у масиві ${indexOfOlga}`)
+		else console.log('Такого імені немає')
+
+	</script>
+</body>
+
+</html>

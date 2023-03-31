@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Завдання 3</title>
+</head>
+
+<body>
+	<h2></h2>
+	<h3>Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів під час сортування включеннями.</h3>
+
+	<script>
+		//1.Функція для генерації рандомного масиву з 30 елементів 
+
+		function generateRandomArray(amountOfElements) {
+			let arr = []
+			for(let i = 0; i < amountOfElements; i++) {
+				const randomElement = (Math.floor(Math.random() * 50))
+				arr.push(randomElement)
+			}
+			return arr
+		}
+
+		const randomArr = generateRandomArray(30)
+
+		console.log(randomArr)
+
+		//2.Функція для підрахунку кількості обмінів під час сортуваня включеннями
+
+		function getAmountOfInsertSort(arr) {
+			let counter = 0
+			for(let i = 1; i < arr.length; i++) {
+				const currentEl = arr[i]
+				let j = i - 1
+				while(j >= 0 && arr[j] > currentEl) {
+					arr[j + 1] = arr[j]
+					j = j - 1
+					counter++
+				}
+				arr[j + 1] = currentEl
+			}
+			return counter
+		}
+
+		const result = getAmountOfInsertSort(randomArr)
+
+		console.log(result)
+	</script>
+
+</body>
+
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Завдання 4</title>
+</head>
+
+<body>
+	<h2>Завдання 4</h2>
+	<h3>Для розглянутих методів сортування спробувати вивести етапи сортування шляхом виведення відповідних таблиць за
+		зразком.</h3>
+
+	<script>
+
+		//0. Функція для генерації массиву з 5 чисел від 1-10
+
+		function generateRandomArray(amountOfElements) {
+			let arr = []
+			for(let i = 0; i < amountOfElements; i++) {
+				const randomElement = (Math.floor(Math.random() * 11))
+				arr.push(randomElement)
+			}
+			return arr
+		}
+
+		const randomArr = generateRandomArray(10)
+
+		console.log(`Початковий масив = ${randomArr}`)
+
+		//1.Сортування бульбашкою 
+
+		function getAmountOfBubbleChanges(arr) {
+			let changed
+
+			do {
+				changed = false
+				for(let i = 1; i < arr.length; i++) {
+					if(arr[i - 1] > arr[i]) {
+						let temp = arr[i - 1]
+						arr[i - 1] = arr[i]
+						arr[i] = temp
+						changed = true
+					}
+					console.log(`Сортування бульбашкою.Массив = ${arr}`)
+				}
+			} while(changed)
+		}
+
+		// const resultOfBubbleChanges = getAmountOfBubbleChanges(randomArr)
+
+		//2.Сортування змішуванням
+
+		function swap(arr, i, j) {
+			const temp = arr[i]
+			arr[i] = arr[j]
+			arr[j] = temp
+		}
+
+		function getAmountOfCoctailSort(arr) {
+			let leftIndex = 0
+			let rightIndex = arr.length - 1
+
+
+			while(leftIndex < rightIndex) {
+				for(let index = leftIndex; index < rightIndex; index++) {
+					if(arr[index] > arr[index + 1]) {
+						swap(arr, index, index + 1)
+						console.log(`Сортовуння змішуванням.Массив = ${arr}`)
+					}
+				}
+
+				rightIndex--
+
+				for(let index = rightIndex; index > leftIndex; index--) {
+					if(arr[index] < arr[index - 1]) {
+						swap(arr, index, index - 1)
+						console.log(`Сортовуння змішуванням.Массив = ${arr}`)
+					}
+				}
+
+				leftIndex++
+			}
+
+		}
+
+		// const resultOfCoctailSort = getAmountOfCoctailSort(randomArr)
+
+		//3.Сортування виключеннями
+
+		function getAmountOfInsertSort(arr) {
+			for(let i = 1; i < arr.length; i++) {
+				const currentEl = arr[i]
+				let j = i - 1
+				while(j >= 0 && arr[j] > currentEl) {
+					arr[j + 1] = arr[j]
+					j = j - 1
+					console.log(`Сортування виключеннями.Массив = ${arr}`)
+				}
+				arr[j + 1] = currentEl
+			}
+		}
+
+		// const resultOfInsertSort = getAmountOfInsertSort(randomArr)
+
+	</script>
+</body>
+
+</html>
