@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Завдання 1</title>
+</head>
+
+<body>
+	<h2>Завдання 1</h2>
+	<h3>Визначити х10</h3>
+
+	<script>
+
+		//1.Рекурсивний алгоритм
+		// function factorial(x) {
+		// 	if(x === 0) return 1
+		// 	else
+		// 		return factorial(x - 1) + 2 * x
+		// }
+
+		// let result = factorial(10)
+
+		// document.write(result)
+
+		//2.Нерекурсивний алгоритм 
+
+		function factorial_2(x) {
+			let res = 1;
+			for(let i = 2; i <= x; i++) {
+				res = res + 2 * i;
+			}
+			return res;
+		}
+
+		let f10 = factorial_2(10);
+
+		document.write(f10);
+
+
+
+	</script>
+</body>
+
+</html>

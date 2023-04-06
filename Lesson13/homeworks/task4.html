@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Завдання 4</title>
+</head>
+
+<body>
+	<h2>Завдання 4</h2>
+	<h3> З використанням замикань розробити ітератор, тобто функцію, що буде поступово за окремими викликами видавати
+		по одну букву наперед заданого слова. З використанням нього розробити гру «Прекладач». Виводимо для
+		користувача опис цього слова і по одну букву користувач вводить переклад цього слова. Підрахувати кількість
+		вгаданих букв.
+	</h3>
+	<script>
+
+		function getTranslation(secretWord) {
+			let i = 0
+			let counter = 0
+			return (letter) => {
+				if(i < secretWord.length) {
+					i++
+				}
+				if(secretWord[i - 1] === letter) {
+					counter++
+				}
+				return counter
+			}
+		}
+
+		function gameTranslation(secretWord) {
+			const letters = getTranslation(secretWord)
+			let i = 0
+			while(i < secretWord.length) {
+				let letter = prompt('Собака англійською')
+				let lettersCounter = letters(letter)
+				alert(`Ви вгадали ${lettersCounter} `)
+				i++
+			}
+		}
+
+
+
+		let secretWord = 'dog'
+		gameTranslation(secretWord)
+
+	</script>
+</body>
+
+</html>

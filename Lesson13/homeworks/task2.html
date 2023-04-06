@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Завдання 2</title>
+</head>
+
+<body>
+	<h2>Завдання 2</h2>
+	<h3>Визначити хn</h3>
+	<script>
+		//1.Рекурсивний алгоритм 
+
+		// function factorial(x) {
+		// 	if(x === 0 || x === 1) return 1
+		// 	else
+		// 		return factorial(x - 1) + factorial(x - 2) * 2
+		// }
+
+
+		//2.Нерекурсивний алгоритм
+
+		function factorial(x) {
+			if(x === 0 || x === 1) return 1
+			else {
+				let x_i_1 = 1
+				let x_i_2 = 1
+				let x_i = 1
+				for(let i = 2; i <= x; i++) {
+					x_i = x_i_1 + (x_i_2 * 2)
+					x_i_2 = x_i_1
+					x_i_1 = x_i
+				}
+				return x_i
+			}
+
+		}
+		let x = parseInt(prompt('Ведите число'))
+		let result = factorial(x)
+		document.write(result)
+
+	</script>
+</body>
+
+</html>

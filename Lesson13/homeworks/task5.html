@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Завдання 5</title>
+</head>
+
+<body>
+	<h2>Завдання 5</h2>
+	<h3>Тренажер додавання. Кожні 10 секунд користувачу задають випадковий приклад з додавання двох цифр і робиться
+		перевірка.
+	</h3>
+	<script>
+
+		//1.Функція для генерації прикладів
+
+		function getRandomExmpl() {
+			return () => {
+				let firstNumber = Math.floor(Math.random() * 10)
+				let secondNumber = Math.floor(Math.random() * 10)
+				let reslt = secondNumber + firstNumber
+				let userAnswer = parseInt(prompt(`${firstNumber} + ${secondNumber}`))
+				if(userAnswer === reslt)
+					alert('Правильно')
+				else
+					alert('Не правельний результат')
+			}
+		}
+
+		//2.Таймер
+
+		let timer = setInterval(
+			getRandomExmpl(),
+			10000
+		)
+
+
+	</script>
+
+</body>
+
+</html>
