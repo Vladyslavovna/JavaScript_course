@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Завдання 1</title>
+</head>
+
+<body>
+	<h2>Завдання 1</h2>
+	<h3>Описати масив об’єктів – сайтів розроблених компанією з такими властивостями
+	</h3>
+	<script>
+
+		//Загальний об"єкт
+
+		let websites = [
+			{
+				title: "Website1",
+				owner: "Mike",
+				sponsors: [
+					{
+						secondName: "Listov",
+						firstName: "Aleksey",
+						investment: 2000
+					},
+					{
+						secondName: "Alekseev",
+						firstName: "Dmitryi",
+						investment: 3000
+					}
+				],
+				year: 2007,
+				price: 1500
+			},
+
+			{
+				title: "Website2",
+				owner: "Andrew",
+				sponsors: [
+					{
+						secondName: "Mikhail",
+						firstName: "Tkachuk",
+						investment: 9000
+					},
+					{
+						secondName: "Olga",
+						firstName: "Mirohina",
+						investment: 5500
+					}
+				],
+				year: 2003,
+				price: 70000
+			},
+
+			{
+				title: "Website3",
+				owner: "Anna",
+				sponsors: [
+					{
+						secondName: "Sergiy",
+						firstName: "Ponomarenko",
+						investment: 1000
+					},
+					{
+						secondName: "Mariya",
+						firstName: "Lubinova",
+						investment: 770000
+					}
+				],
+				year: 2002,
+				price: 6700
+			}
+		]
+
+		//1.загальна вартість усіх сайтів
+
+		//reduce
+
+		const totalPrice = websites.reduce((prevPrice, currentPrice) => {
+			return currentPrice.price + prevPrice
+		}
+			, 0
+		)
+
+		//for...of
+
+		// let totalPrice = 0
+		// for(let prices of websites) {
+		// 	totalPrice += prices.price
+		// }
+		alert(totalPrice)
+
+		//2.кількість сайтів, що було зроблено між 2000 та 2009 рр.
+
+		const countBetween2000_2009 = websites.reduce(
+			(prevYear, currentYear) => {
+				return currentYear.year > 2000 && currentYear.year <= 2009 ? prevYear + 1 : prevYear
+			}
+			, 0
+		)
+
+		alert(countBetween2000_2009)
+
+		//3.кількість сайтів, де сума спонсорських вкладень була більшою за 100000
+
+		function getTheBiggestInvestment(website) {
+			let amountOfWebsites = 0
+			for(let i in website) {
+				let totalInvestment = 0
+				for(let k in website[i].sponsors) {
+					totalInvestment += website[i].sponsors[k].investment
+				}
+				if(totalInvestment > 100000) amountOfWebsites++
+			}
+			return amountOfWebsites
+		}
+
+		alert(getTheBiggestInvestment(websites))
+
+		//4.створити загальний список усіх спонсорів (поки можуть повторюватись, просто зібрати усі у масив)
+
+		function getListOfSponsors(website) {
+			let arrayOfSponsors = []
+			for(let i in website) {
+				for(let j in website[i].sponsors) {
+					arrayOfSponsors.push(`${website[i].sponsors[j].firstName}  ${website[i].sponsors[j].secondName}`)
+				}
+			}
+			return arrayOfSponsors
+		}
+
+		console.log(getListOfSponsors(websites))
+
+		//5.знайти рік, коли прибуток був найбільшим
+
+		//sort //
+
+		// const theMostExpensiveWebsite = websites.sort((a, b) => b.price - a.price)[0].year
+
+		//reduce //
+
+		const theMostExpensiveWebsite = websites.reduce(
+			(prevIncome, currentIncome) => {
+				return prevIncome.price > currentIncome.price ? prevIncome : currentIncome
+			}
+		).year
+
+		console.log(theMostExpensiveWebsite)
+
+		//for 
+
+		// function getTheBiggestPriceYear(website) {
+		// 	let maxPrice = -Infinity
+		// 	let maxYear
+		// 	for(let i = 0; i < website.length; i++) {
+		// 		if(website[i].price > maxPrice) {
+		// 			maxPrice = website[i].price
+		// 			maxYear = website[i].year
+		// 		}
+		// 	}
+		// 	return maxYear
+		// }
+
+		// console.log(getTheBiggestPriceYear(websites))
+
+		//6.упорядкувати список за спаданням прибутку
+
+		const sortedPrices = websites.sort((a, b) => {
+			return b.price - a.price
+		})
+
+		console.log(sortedPrices)
+
+		//7.Створити 2 окремих списки з копіями об’єктів, що містять сайти з вартість до 10000 і більше 10000
+
+		const cheapWebsites = websites.slice().filter(website => website.price < 10000);
+		const expensiveWebsites = websites.slice().filter(website => website.price > 10000);
+
+		console.log(cheapWebsites)
+		console.log(expensiveWebsites)
+
+	</script>
+</body>
+
+</html>

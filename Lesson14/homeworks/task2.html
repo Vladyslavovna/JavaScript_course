@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Завдання 2</title>
+</head>
+
+<body>
+	<h2>
+		Розробити функцію, у яку передають об’єкт (день, місяць, рік). Визначити, який буде рік через N місяців.
+	</h2>
+
+	<script>
+
+		function calcFutureYear(obj, numMonths) {
+			const futureMoth = (obj.month + numMonths) % 12
+			const futureYear = obj.year + Math.floor((obj.month + numMonths) / 12)
+			return futureYear
+		}
+
+		const currentDate = {
+			year: 2023,
+			month: 4,
+			day: 11
+		}
+
+		const numMonths = parseInt(prompt('Введіть кількість місяців'))
+
+		console.log(calcFutureyear(currentDate, numMonths))
+
+
+	</script>
+</body>
+
+</html>
