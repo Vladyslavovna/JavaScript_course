@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Завдання 4</title>
+</head>
+Розробити клас Baner
+
+<body>
+	<script>
+
+		class Banner {
+			// Масив об’єктів ( графічних зображень та посилань на сайти)
+			constructor(image) {
+				this.image = image
+			}
+			// методи
+
+
+			// Метод випадкового вибору об’єкта (графічного зображення та посилання)
+			randomBanner() {
+				let randomIndex = Math.floor(Math.random() * this.image.length)
+				return this.image[randomIndex]
+			}
+			// Метод виведення випадкового банера
+			getRandomBanner() {
+				let showBanner = this.randomBanner()
+				document.write(`<a href="${showBanner.link}"><img src="${showBanner.image}"></a>`);
+			}
+		}
+
+		let banner = new Banner([
+			{
+				image: './image-1.jpg',
+				link: "https://uakino.club/cartoon/cartoonseries/16850-drakony-deviat-svitiv-5-sezon.html"
+			},
+			{
+				image: './image-2.jpg',
+				link: "https://uakino.club/cartoon/short_cartoons/16837-u-poshukah-lyudini.html"
+			},
+			{
+				image: './image-3.jpg',
+				link: "https://uakino.club/cartoon/features/16665-do-20-richchya-simpsoniv-v-3d-na-lodu.html"
+			},
+			{
+				image: './image-4.jpg',
+				link: "https://uakino.club/cartoon/cartoonseries/7060-chas-prigod-4-sezon.html"
+			}
+		])
+
+		banner.getRandomBanner()
+
+
+
+
+
+
+	</script>
+</body>
+
+</html>

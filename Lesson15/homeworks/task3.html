@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Завдання 3</title>
+</head>
+Розробити клас MultChecker для перевірки таблиці множення
+<body>
+	<script>
+
+		class MultChecker {
+			constructor(number, amountOfCorrectAnswers, amountOfWrongAnswers) {
+				this.number = number
+				this.amountOfCorrectAnswers = amountOfCorrectAnswers
+				this.amountOfWrongAnswers = amountOfWrongAnswers
+			}
+
+			// Генерування прикладу (метод випадковим чином визначає друге число, перше число фіксоване)
+			randomExmpl() {
+				let randomNum = Math.floor(Math.random() * 10)
+				return randomNum
+			}
+
+			// Перевірка правильності вказаної відповіді
+			checkTheAnswer() {
+				let randomNum = this.randomExmpl()
+				let example = randomNum * this.number
+				let userAnswer = parseInt(prompt(`${this.number} * ${randomNum} = ?`))
+				if(example === userAnswer) {
+					return this.amountOfCorrectAnswers++
+				} else {
+					return this.amountOfWrongAnswers++
+				}
+			}
+
+			// render - виведення інформації про тестування на екран
+			render() {
+				alert(`Кількість правильних відповідей = ${this.amountOfCorrectAnswers}. Кількість не правильних відповідей = ${this.amountOfWrongAnswers}`)
+			}
+		}
+
+		let r1 = new MultChecker(7, 0, 0)
+
+		do {
+			r1.checkTheAnswer();
+			r1.render()
+		} while(true)
+
+
+	</script>
+</body>
+
+</html>

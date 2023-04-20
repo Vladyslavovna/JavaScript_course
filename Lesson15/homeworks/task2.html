@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Завдання 2</title>
+</head>
+Створити об’єкт «Авто». 
+<body>
+	<script>
+
+		function Auto(brand, tankSize, availableFuel, seats, passangers) {
+			this.brand = brand,
+				this.tankSize = tankSize,
+				this.availableFuel = availableFuel,
+				this.seats = seats,
+				this.passangers = passangers
+		}
+
+		// 		Заправка на вказану кількість літрів
+
+		Auto.prototype.fillTheCar = function (shortage, refueling) {
+			shortage = this.tankSize - this.availableFuel
+			refueling = parseInt(prompt('На скількі літрів заправити машину?'))
+			return shortage + refueling
+		}
+
+		// Виведення кількості пасажирів
+
+		Auto.prototype.valueOf = function () {
+			return `${this.passangers} пасажирів`
+		}
+
+		// Додавання пасажирів
+
+		Auto.prototype.addPasangers = function (newPassangers) {
+			newPassangers = parseInt(prompt('Введіть кількість нових пасажирів'))
+			if(this.seats < this.passangers + newPassangers) {
+				throw new Error('Недостатньо місць')
+			} else {
+				return this.passangers += newPassangers
+			}
+		}
+
+		// Висадка пасажирів
+
+		Auto.prototype.removePassangers = function (removedPassangers) {
+			removedPassangers = parseInt(prompt('Скільки пасажирів висадити на зупинці?'))
+			return this.passangers -= removedPassangers
+		}
+
+		let car = new Auto('BMW', 200, 100, 10, 0);
+		car.fillTheCar();
+		car.addPasangers();
+		car.valueOf();
+		car.removePassangers();
+
+		console.log(car);
+
+
+	</script>
+</body>
+
+</html>

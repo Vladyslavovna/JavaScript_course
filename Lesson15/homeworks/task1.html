@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Завдання 1</title>
+</head>
+Створити об’єкт «Тир». У масиві зберігаються 1, якщо у цьому квадраті є заєць і 0 в іншому випадку.
+
+<body>
+	<script>
+
+		// Масив, у якому зберігається поле з зайцями
+		function ShootingField() {
+			this.field = this.generatedField()
+			this.findTheBunny()
+		}
+
+		//Виведення ігрового поля
+		ShootingField.prototype.generatedField = function (cell, field) {
+			size = parseInt(prompt('Введіть розмір поля'))
+			field = []
+			for(let i = 0; i < size; i++) {
+				field.push(Math.floor(Math.random() * 2))
+			}
+			return field
+		}
+
+		// Метод пострілу(задається позиція пострілу)
+		ShootingField.prototype.findTheBunny = function () {
+			let shot
+			do {
+				shot = parseInt(prompt(`Введіть позицію пострілу від 0 до ${this.field.length - 1}`))
+				if(this.field[shot] === 1) {
+					alert('Ви влучили в зайця')
+				} else {
+					alert('Промах!Спробуйте ще раз')
+				}
+			} while(this.field[shot] === 0)
+		}
+
+		let r = new ShootingField()
+		console.log(r.field)
+		console.log(r.game)
+
+	</script>
+</body>
+
+</html>

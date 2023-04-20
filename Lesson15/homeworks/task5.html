@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Завдання 5</title>
+</head>
+Розробити клас «Керівник танців»
+
+<body>
+	<script>
+
+		class HeadOfDances {
+			constructor(boys, girls) {
+				this.boys = boys
+				this.girls = girls
+			}
+			// Метод випадкового вибору імені хлопця
+			randomBoy() {
+				let randomIndex = Math.floor(Math.random() * this.boys.length)
+				return randomIndex
+			}
+
+			// Метод випадкового вибору імені дівчини
+			randomGirl() {
+				let randomIndex = Math.floor(Math.random() * this.girls.length)
+				return randomIndex
+			}
+
+			// Метод виведення пари для танців
+			getCouple() {
+				let randomGirl = this.randomGirl()
+				let randomBoy = this.randomBoy()
+				let randomCouple = this.girls[randomGirl] + ' в парі з ' + this.boys[randomBoy]
+				return randomCouple
+			}
+
+			// Метод run, який ініціює через кожні 5 секунд виведення нової пари для танців
+			run() {
+				let newCouple = setInterval(
+					() =>
+						alert(this.getCouple()),
+					5000
+				)
+				return newCouple
+			}
+
+		}
+
+		let r1 = new HeadOfDances(['Інна', 'Ольга', 'Іра'], ['Максим', 'Олег', 'Андрій'])
+		r1.run()
+
+
+
+
+	</script>
+</body>
+
+</html>

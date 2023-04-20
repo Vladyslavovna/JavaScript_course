@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Завдання 4</title>
+</head>
+Створити клас TBankomat, який моделює роботу банкомата. Клас повинен містити поля для зберігання кількості купюр кожного
+із номіналів від 5 до 200 гривень. Реалізувати методи знаходження максимальної та мінімальної сум, які може видати
+банкомат, та метод зняття деякої суми.
+
+<body>
+	<script>
+
+		class TBanknote {
+			constructor(amount, rating) {
+				this.amount = amount
+				this.rating = rating
+			}
+			toString() {
+				return `(${this.amount}, ${this.rating})`
+			}
+		}
+
+
+		const banknotes = [
+			new TBanknote(10, 5),
+			new TBanknote(8, 10),
+			new TBanknote(15, 20),
+			new TBanknote(32, 50),
+			new TBanknote(50, 100),
+			new TBanknote(10, 200),
+		];
+
+
+		class TBankomat {
+			constructor(banknotes) {
+				this.banknotes = banknotes
+			}
+
+			//максимальна сума
+			GetMaxSum(banknotes) {
+				let maxSum = this.banknotes.reduce((prevVal, currVal) => {
+					return prevVal + currVal.amount * currVal.rating
+				}, 0)
+				return `Максимальна сума у банкоматі = ${maxSum} грн`
+			}
+
+			//мінімальна сума
+			GetMinSum(banknotes) {
+				let filteredBanknotes = this.banknotes.filter(banknote => banknote.amount > 0).map(banknote => banknote.rating).sort((a, b) => a - b)
+				let minSum = filteredBanknotes[0]
+				for(let i = 0; i < filteredBanknotes.length; i++) {
+					if(filteredBanknotes[i] !== minSum) {
+						minSum = filteredBanknotes[i]
+						break
+					}
+				}
+				return `Мінімальна сумма дня зняття = ${minSum} грн`
+			}
+
+			//зняття коштів
+			Withdrawal(amountOfWithdrawal) {
+				if(amountOfWithdrawal > this.GetMaxSum(banknotes) || amountOfWithdrawal < this.GetMinSum(banknotes)) {
+					throw new Error('Операція неможлива');
+				}
+
+				let remainingAmount = amountOfWithdrawal;
+				let temp = [];
+
+				this.banknotes.sort((a, b) => b.rating - a.rating);
+
+				for(let banknote of this.banknotes) {
+					let count = Math.min(Math.floor(remainingAmount / banknote.rating), banknote.amount);
+					if(count > 0) {
+						remainingAmount -= banknote.rating * count;
+						temp.push(new TBanknote(banknote.rating, count));
+						banknote.amount -= count;
+						if(banknote.amount === 0) break;
+					}
+				}
+			}
+		}
+
+		let r1 = new TBankomat(banknotes)
+		console.log(r1.GetMaxSum())
+		console.log(r1.GetMinSum())
+		r1.Withdrawal(200)
+		console.log(r1)
+
+
+	</script>
+</body>
+
+</html>

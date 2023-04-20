@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Завдання 0</title>
+</head>
+Дано два об’єкта. Обидва містять масив цілих чисел. При цьому у одному з них є функція знаходження суми, а у іншому –
+функція для знаходження добутку тих, які знаходяться між заданими мінімальним і максимальних значенням.
+
+<body>
+	<script>
+		//Дано два об’єкта. Обидва містять масив цілих чисел. При цьому у одному з них є функція знаходження суми, а у іншому – функція для знаходження добутку тих, які знаходяться між заданими мінімальним і максимальних значенням.
+
+		// Перший  об’єкт з функцією додавання цілих чисел у масиві
+		let obj1 = {
+			num: [1, 5, 10, 35, 50, 34, 55],
+			getSum: function () {
+				return this.num.reduce((prevSum, currentSum) => prevSum + currentSum, 0)
+			}
+		}
+
+		//Другий об’єкт з функцією для знаходження добутку тих, які знаходяться між заданими мінімальним і максимальних значеннями
+		let obj2 = {
+			num: [1, 100, 40, 35, 11, 84, 67],
+			getMult: function (minValue, maxValue) {
+				let result = 1
+				for(let i = minValue; i <= maxValue; i++) {
+					result *= this.num[i]
+				}
+				return result
+			}
+		}
+
+		let sum = obj1.getSum.apply(obj2)
+
+		console.log(sum)
+
+		let mult = obj2.getMult.call(obj1, 1, 4)
+
+		console.log(mult)
+
+	</script>
+</body>
+
+</html>

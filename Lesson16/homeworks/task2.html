@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Завдання 2</title>
+</head>
+Створити клас TMoney для роботи з грошовими сумами. Сума повинна зберігатися у вигляді доларового еквіваленту.
+Реалізувати методи додавання/вилучення грошової маси, вказуючи необхідну суму у гривнях, та визначення курсу долара, при
+якому сума у гривнях збільшиться на 100. Курс долара зберігати в окремому полі.
+
+<body>
+	<script>
+		class TMoney {
+			#balance
+			#usdRate
+			#sum
+			constructor(dollarExchangeRate, dollarEquivalentSum) {
+				this.#balance = 0
+				this.#usdRate = dollarExchangeRate
+				this.#sum = dollarEquivalentSum / dollarExchangeRate
+			}
+
+			//Геттеры
+
+			get Balance() {
+				return this.#balance
+			}
+
+			get UsdRate() {
+				return this.#usdRate
+			}
+
+			//Сеттеры
+
+			set Balance(newAmount) {
+				if(newAmount < 1) throw new Error('Менше бути не може')
+				this.#balance = newAmount
+			}
+
+			set UsdRate(rate) {
+				if(rate < 1) throw new Error('Некоректне значення курсу')
+				this.#usdRate = rate
+			}
+
+			//Методы
+
+			AddMoney(amount) {
+				this.#sum += (amount / 100) * this.#usdRate
+				return this.#sum
+			}
+
+			RemoveMoney(amount) {
+				this.#sum -= (amount / 100) * this.#usdRate
+				return this.#sum
+			}
+
+			toString() {
+				return `Ваш баланс ${(this.#sum).toFixed(2)}`
+			}
+		}
+
+		let balance = new TMoney(37, 20)
+		balance.AddMoney(20)
+		console.log(balance.toString());
+		balance.AddMoney(100)
+		console.log(balance.toString());
+		balance.RemoveMoney(20)
+		console.log(balance.toString());
+
+
+
+	</script>
+</body>
+
+</html>

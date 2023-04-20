@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Завдання 3</title>
+</head>
+поля
+назва фірми;
+дата заснування (рік, місяць);
+послуги (назва послуги, вартість, термін виконання);
+адреси філіалів (країна, місто, вулиця, номер будинку);
+методи
+визначення кількості років існування фірми;
+виведення всіх філіалів фірми у вказаному місті;
+виведення на екран послуг, що можуть бути виконані за вказану суму грошей та вказаний термін часу;
+
+
+<body>
+
+	<script>
+
+
+		class Firm {
+			constructor(companyName, foundationDate, services, addresses) {
+				this.companyName = companyName;
+				this.foundationDate = foundationDate;
+				this.services = services;
+				this.addresses = addresses;
+			}
+			//Методы
+
+			// визначення кількості років існування фірми;
+			Existence() {
+				const currentYear = 2023
+				let result = currentYear - this.foundationDate
+				return `Кількість років існування фірми = ${result}`
+			}
+
+			// виведення всіх філіалів фірми у вказаному місті;
+			Branches(city) {
+				const branches = []
+				for(let adress of this.addresses) {
+					if(adress.city === city) {
+						branches.push(adress)
+					}
+				}
+				let resultBrances = branches.map((branch) => {
+					return `${branch.address}, ${branch.city}`;
+				})
+				return `Філіали у вашому місті ${resultBrances}, `
+			}
+
+			// виведення на екран послуг, що можуть бути виконані за вказану суму грошей та вказаний термін часу;
+
+			AfforableServices(price, deadline) {
+				const affotableService = this.services.filter((service) => {
+					return service.price <= price && service.deadline <= deadline
+				})
+				const resultAfoorableService = affotableService.map((service =>
+					service.name))
+				return `Послуги,що можуть бути виконані за вказану суму грошей та вказаний термін часу = ${resultAfoorableService}`
+			}
+
+			toString() {
+				let servicesList = this.services.map((service) => {
+					return service.name
+				})
+				return `Назва фірми = ${this.companyName}, дата заснування = ${this.foundationDate}, послуги = ${servicesList}`
+			}
+		}
+
+		let firm = new Firm("Компанія 1", 1990, [
+			{ name: "Послуга1", price: 100, deadline: 3 },
+			{ name: "Послуга2", price: 200, deadline: 5 },
+			{ name: "Послуга3", price: 300, deadline: 7 },
+		], [
+			{ city: "Київ", address: "Головна, 1" },
+			{ city: "Харків", address: "Вишняківська, 2" },
+			{ city: "Черкаси", address: "Степана Бендери, 3" },
+		]);
+
+		console.log(firm.Existence().toString());
+		console.log(firm.Branches("Київ"));
+		console.log(firm.AfforableServices(250, 7));
+
+		console.log(firm.toString())
+
+
+
+	</script>
+</body>
+
+</html>
