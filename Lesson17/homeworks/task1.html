@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	Створити клас, що дозволяє виконувати такі операції над масивами: знаходження кількості додатних, кількості
+	від’ємних, кількість входжень деякого числа (статичні методи)
+
+	<script>
+
+		class MyArray {
+
+			static AmountOfPositive(arrayList) {
+				return arrayList.reduce((prevNum, currentNum) => currentNum > 0 ? prevNum + 1 : prevNum
+					, 0)
+			}
+
+			static AmountOfNegatice(arrayList) {
+				return arrayList.reduce((prevNum, currentNum) => currentNum < 0 ? prevNum + 1 : prevNum
+					, 0)
+			}
+
+			static AmountOfRepeat(arrayList, lookingNum) {
+				return arrayList.reduce((prevNum, currentNum) => currentNum === lookingNum ? prevNum + 1 : prevNum
+					, 0)
+			}
+		}
+
+		const arrayList = [2, 5, 3, 1, -10]
+		console.log(MyArray.AmountOfPositive(arrayList))
+		console.log(MyArray.AmountOfNegatice(arrayList))
+		console.log(MyArray.AmountOfRepeat(arrayList, -10))
+
+
+	</script>
+</body>
+
+</html>

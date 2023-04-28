@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	Дано два класи MultChecker (клас для перевірки таблиці множення - рандомно генеруються числа, які треба
+	перемножати), AddChecker (клас для перевірки додавання - рандомно генеруються числа у заданому діапазоні, які треба
+	додавати). Обидва класи надсилають результати тестування об'єкту класу Hystory, який зберігає історію тестування у
+	масиві у вигляді об'єктів
+	Приклад.
+	testsList= [
+	{firstNum:1, secondNum:5,opration:’*’, userAnswer:7, correctAnswer:5},
+	{firstNum:3, secondNum:4,opration:’+’, userAnswer:7, correctAnswer:7},
+	]
+	Можна створити окремий клас TestData, який описує один такий тест і у якому будуть ці поля.
+	Розробити клас TestManager, який використовуючи ці класи за допомогою таймера періодично генерує якісь N задач
+	(рандомно вибираємо, що опитувати: додавання чи множення) і проводить опитування. Результати тестування додаються в
+	об’єкт History. Зробити так, щоб об'єкт такого класу можна було створити тільки один. Коли зроблено ці N задач
+	вивести усю історію на екран.
+	<script>
+
+		//Класс для генерації тестів з множення
+		class MultChecker {
+			constructor() {
+				this.firstNumber = 1
+				this.secondNumber = 1
+				this.userResult = 0
+				this.correctResult = 0
+
+			}
+
+			MultiplyNumbers() {
+				this.firstNumber = Math.floor(Math.random() * 10)
+				this.secondNumber = Math.floor(Math.random() * 10)
+				this.correctResult = this.firstNumber * this.secondNumber
+				alert(`${this.firstNumber} * ${this.secondNumber} = `)
+				this.userResult = parseInt(prompt('Введіть результат'))
+			}
+
+
+		}
+
+		//клас для генерації тестів з додавання
+		class AddChecker {
+			constructor() {
+				this.firstNumber = 1
+				this.secondNumber = 1
+				this.userResult = 0
+				this.correctResult = 0
+
+			}
+
+			AddNumbers() {
+				this.firstNumber = Math.floor(Math.random() * 10)
+				this.secondNumber = Math.floor(Math.random() * 10)
+				this.correctResult = this.firstNumber + this.secondNumber
+				alert(`${this.firstNumber} + ${this.secondNumber} = `)
+				this.userResult = parseInt(prompt('Введіть результат'))
+			}
+
+
+
+		}
+
+		//класс для зберігання тестів
+		class History {
+			static historyRef
+			constructor() {
+				this.testList = []
+				if(History.historyRef) {
+					return History.historyRef
+					History.historyRef = this
+				}
+
+			}
+
+			AddMultiplicationTest() {
+				let multChecker = new MultChecker()
+				multChecker.MultiplyNumbers()
+				this.testList.push(multChecker)
+			}
+
+			AddAdditionTest() {
+				let addChecker = new AddChecker()
+				addChecker.AddNumbers()
+				this.testList.push(addChecker)
+			}
+		}
+
+		//Генератор тестів
+		class TestManager {
+			constructor() {
+				this.testData = new History()
+			}
+
+			RunTests(testsType, testsCount) { //метод для запуску таймера.
+				testsCount = parseInt(prompt('Введіть кількість тестів'))
+				if(testsCount < 1) {
+					throw new Error('Помилка')  //генеруємо помилку якщо кількість тестів менша за 1
+				}
+				let timer = setInterval(() => {
+					if(testsCount > 0) { //якщо лічильник більше нуля
+						testsType = Math.floor(Math.random() * 2) //генеруємо тип тесту
+						let checker //створюємо змінну
+						if(testsType === 0) { //якщо тип тесту рівний 0
+							checker = this.testData //записуємо екземпляр
+							this.testData.AddMultiplicationTest(); //і викликаємо метод додавання
+						}
+						else if(testsType === 1) { //так само із множенням
+							checker = this.testData
+							this.testData.AddAdditionTest();
+
+						}
+						testsCount-- //зменшуємо лічильник
+					} else { //якщо лічильник менше нуля
+						clearInterval(timer) //видаляємо таймер
+						console.log(this.testData.testList) //виводимо результат
+					}
+				}, 5000)
+
+			}
+		}
+
+
+
+		let testManager = new TestManager()
+		testManager.RunTests()
+
+
+	</script>
+</body>
+
+</html>

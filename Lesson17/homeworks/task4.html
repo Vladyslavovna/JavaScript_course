@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Завдання 4</title>
+</head>
+
+<body>
+	Склад.
+	База товарів, які зберігаються на складі:
+	назва товару,
+	одиниця виміру,
+	кількість,
+
+	фірма виробник
+	(назва,
+	реєстраційний номер).
+
+	Організувати
+	реєстрацію/відвантаження товарів,
+	фільтрація за назвою товару,
+	фільтрація за
+	назвою фірми
+
+	<script>
+
+		//Класс бази товарів 
+
+		class Product {
+			constructor(name, unit, amount, manufacturerList) {
+				this.name = name
+				this.unit = unit
+				this.amount = amount
+				this.manufacturerList = manufacturerList
+			}
+
+			//Геттери
+
+			get NameOfGoods() {
+				return this.name
+			}
+
+			get Unit() {
+				return this.unit
+			}
+
+			get Amount() {
+				return this.amount
+			}
+
+			get ManufacturerList() {
+				return this.manufacturerList
+			}
+
+			//Сеттери
+			set NameOfGoods(val) {
+				if(val === '') throw new Error('Помилка')
+				this.name = val
+			}
+
+			set Unit(val) {
+				if(val === '') throw new Error('Помилка')
+				this.unit = val
+			}
+
+			set Amount(val) {
+				if(val < 0) throw new Error('Помилка')
+				this.amount = val
+			}
+		}
+
+		//Класс фірми виробника
+
+		class Manufacturer {
+			constructor(title, registrationNumber) {
+				this.title = title
+				this.registrationNumber = registrationNumber
+			}
+
+			//Геттер
+			get Title() {
+				return this.title
+			}
+
+			get RegistrationNumber() {
+				return this.registrationNumber
+			}
+
+			//Сеттер
+			set Title(val) {
+				if(val === '') throw new Error('Помилка')
+				this.title = val
+			}
+
+			set RegistrationNumber(val) {
+				if(val < 1) throw new Error('Помилка')
+				this.registrationNumber = val
+			}
+
+		}
+
+		//Класс складу товарів
+
+		class Warehouse {
+			constructor() {
+				this.goods = [] //створюємо масив,де буде зберігатися база товарів
+			}
+
+			//Додавання нових товарів
+			RegisterGoods(name, unit, amount, title, registrationNumber) {  //створюємо метод для генерації єкземпляру бази
+				let manufacturer = new Manufacturer(title, registrationNumber) //створюємо екземпляр фірми виробника
+				let product = new Product(name, unit, amount, manufacturer) //створюємо екземпляр бази(куди передаємо інформацію і про фірму виробника)
+				this.goods.push(product) //додаємо екземпляр бази в масив
+			}
+
+			//Відвантаження товарів 
+			Shipment(amount, nameOfGoods) {  //аргументи це кількість товарів для відвантаження та їх назва
+				let index = this.goods.findIndex(item => item.NameOfGoods === nameOfGoods) //шукаємо індекс товару за його назвою у масиві goods
+				if(index < 0) throw new Error('Товар не знайдено')//якщо індекс не знайдено,викидую помилку
+				this.goods[index].Amount -= amount //а якщо знайдено,то віднімаю від кількості товару ту кількість,яку запросили
+				if(this.goods[index].Amount < amount) throw new Error('Стільки товару немає')//якщо стільки товару немає,викидую помилку
+			}
+
+			//Фільтрація за назвою товару
+			FilterbyProductName(nameOfGoods) {
+				return this.goods.filter(item => item.NameOfGoods === nameOfGoods)
+
+			}
+
+			//Фільтрація за назвою фірми
+			FilterByManufacturerTitle(title) {
+				return this.goods.filter(item => item.manufacturerList.Title === title)
+			}
+		}
+
+		let warehouse = new Warehouse()
+		warehouse.RegisterGoods('Молоко', 'Літри', 1000, 'Фірма1', 1020393043)
+		console.log(warehouse.goods)
+		// warehouse.Shipment(80, 'Товар1')
+
+		console.log(warehouse.FilterbyProductName('Молоко'))
+
+
+	</script>
+</body>
+
+</html>

@@ -14,81 +14,91 @@
 <body>
 	<script>
 
+		//Класс для хранения купюр
+
 		class TBanknote {
-			constructor(amount, rating) {
+			constructor(rate, amount) {
+				this.rate = rate
 				this.amount = amount
-				this.rating = rating
 			}
 			toString() {
-				return `(${this.amount}, ${this.rating})`
+				return `${this.rate} : ${this.amount} `
 			}
 		}
 
+		let banknotes = [
+			new TBanknote(5, 1),
+			new TBanknote(10, 7),
+			new TBanknote(20, 6),
+			new TBanknote(50, 2),
+			new TBanknote(100, 3),
+			new TBanknote(200, 5),
 
-		const banknotes = [
-			new TBanknote(10, 5),
-			new TBanknote(8, 10),
-			new TBanknote(15, 20),
-			new TBanknote(32, 50),
-			new TBanknote(50, 100),
-			new TBanknote(10, 200),
-		];
+		]
 
 
 		class TBankomat {
-			constructor(banknotes) {
-				this.banknotes = banknotes
+			constructor(banknotesList) {
+				this.banknotesList = banknotesList
 			}
 
-			//максимальна сума
-			GetMaxSum(banknotes) {
-				let maxSum = this.banknotes.reduce((prevVal, currVal) => {
-					return prevVal + currVal.amount * currVal.rating
-				}, 0)
-				return `Максимальна сума у банкоматі = ${maxSum} грн`
+			//Методы
+
+			//Метод для нахождения максимальной суммы в банкомате
+
+			GetMaxSum(banknotesList) {
+				let maxAmount = 0
+				for(let denomination in this.banknotesList) {  //проходимся по всему массиву
+					let banknote = this.banknotesList[denomination]  //находим по банкноте и её значению
+					let amount = banknote.amount * banknote.rate //умножаем номинал на количество
+					maxAmount += amount  //кладём это в переменную
+				}
+				return `Максимальна сума у банкоматі : ${maxAmount} грн`
 			}
 
-			//мінімальна сума
-			GetMinSum(banknotes) {
-				let filteredBanknotes = this.banknotes.filter(banknote => banknote.amount > 0).map(banknote => banknote.rating).sort((a, b) => a - b)
-				let minSum = filteredBanknotes[0]
-				for(let i = 0; i < filteredBanknotes.length; i++) {
-					if(filteredBanknotes[i] !== minSum) {
-						minSum = filteredBanknotes[i]
-						break
+			//Метод для нахождения минимальной суммы в банкомате
+			GetMinSum(banknotesList) {
+				let minAmount = Infinity //устанавливаем для счётчика минимальное значение
+				for(let denomination in this.banknotesList) { //проходимся по всем значениям  в массиве
+					let banknote = this.banknotesList[denomination] //устанавливаем переменной значение каждого ключа в с массива
+					if(banknote.amount > 0 && banknote.rate < minAmount) //если количество банкнот больше 0 и номинал банкноты меньше минимального значения minAmount
+						minAmount = banknote.rate //кладём этот минимальный номинал в переменную для минимального значения с массива
+				}
+				if(minAmount === Infinity) throw new Error('Помилка')
+				return ` Мінімальна сума для зняття : ${minAmount} грн`
+			}
+
+			//Метод снятия денег с банкомата 
+			Withdraw(totalSum, banknotesList) {
+				let withdrawBanknotes = [] //массив для определения количества банкнот,которые были выданы
+				let remainingAmount = totalSum
+				let sortedBanknotes = this.banknotesList.sort((a, b) => b.rate - a.rate) //Сортируем банкноты от большего номанила к меньшему(что-бы сначала выдавались крупные купюры в зависимости от запрашиваемой суммы)
+				for(let i = 0; i < sortedBanknotes.length; i++) { //иттерируем по всему массиву
+					let banknote = sortedBanknotes[i] //на каждой иттерации переменная banknote присваивается текущей банкноте
+					let denomination = banknote.rate //на каждой иттерации переменная denomination присваивается номиналу текущей банкноте 
+					let banknoteToWithdraw = Math.floor(remainingAmount / denomination) //Вычисляем количество банкнот,которые нужно выдать
+					if(banknoteToWithdraw > banknote.amount) banknoteToWithdraw = banknote.amount //Если количество банкнот которые нужно выдать больше чем количество банкнот текущего номинала,тогда банкомат будет выдавать все доступные банкноты данного номинала
+					let withdrawAmount = banknoteToWithdraw * denomination //Вычисляем общую сумму которую нужно выдать
+					remainingAmount -= withdrawAmount //вычитаем эту сумму
+					if(banknoteToWithdraw > 0) { //если количество банкнот которые нужно выдать больше 0,то
+						withdrawBanknotes.push(new TBankomat(denomination, banknoteToWithdraw))// создаём новый экземпляр объекта,и пушим его в массив 
+						banknote.amount -= banknoteToWithdraw //и вычитаем количество снятыъ денег
 					}
+					if(remainingAmount === 0) break //если запрашиваемая сумма равна 0,то цикл прерывается
 				}
-				return `Мінімальна сумма дня зняття = ${minSum} грн`
+				if(remainingAmount > 1) throw new Error('Помилка') //Если после прохождения цикла "for" значение "remainingAmount" осталось больше единицы, то функция генерирует исключение с помощью оператора "throw new Error('Помилка')". Это означает, что функция не смогла выдать всю запрошенную сумму и возникла ошибка.
+				return withdrawBanknotes
 			}
 
-			//зняття коштів
-			Withdrawal(amountOfWithdrawal) {
-				if(amountOfWithdrawal > this.GetMaxSum(banknotes) || amountOfWithdrawal < this.GetMinSum(banknotes)) {
-					throw new Error('Операція неможлива');
-				}
-
-				let remainingAmount = amountOfWithdrawal;
-				let temp = [];
-
-				this.banknotes.sort((a, b) => b.rating - a.rating);
-
-				for(let banknote of this.banknotes) {
-					let count = Math.min(Math.floor(remainingAmount / banknote.rating), banknote.amount);
-					if(count > 0) {
-						remainingAmount -= banknote.rating * count;
-						temp.push(new TBanknote(banknote.rating, count));
-						banknote.amount -= count;
-						if(banknote.amount === 0) break;
-					}
-				}
-			}
 		}
 
 		let r1 = new TBankomat(banknotes)
-		console.log(r1.GetMaxSum())
-		console.log(r1.GetMinSum())
-		r1.Withdrawal(200)
 		console.log(r1)
+		r1.Withdraw(100)
+		console.log(r1)
+
+
+
 
 
 	</script>
