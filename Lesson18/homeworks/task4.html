@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Завдання 4</title>
+</head>
+
+<script>
+	//створюю масив (переписать всё заново)
+	window.onload = () => {
+		const wishes = [
+			'Бажаю всього найкращого',
+			'Нехай всі мрії збуваються',
+			'Нехай швидше настане перемога',
+			'Бажаю найкращіх друзів',
+			'Бажаю благополуччя та здоров"я',
+			'Нехай удача завжди буде з тобою',
+			'Бажаю багато любові та щастя'
+		]
+
+
+
+		function addWishes(wishList, amount, container) {
+			container = document.querySelector('.container')
+			for(let i = 0; i < amount; i++) {
+				let randomIndex = Math.floor(Math.random() * wishList.length)
+				let newDiv = document.createElement('div')
+				newDiv.classList.add('paragraph')
+				newDiv.textContent = wishes[randomIndex]
+				container.appendChild(newDiv)
+			}
+		}
+		addWishes(wishes, 3)
+	}
+
+
+</script>
+
+<body>
+	<h1>Задача 4. Наперед задано у скрипті масив зі списком бажань. Після завантаження сторінки випадковим чином
+		вибираються 3 і відображаються у окремих div (їх треба створити і додати на сторінку)</h1>
+	<div class="container">
+
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<script>
+
+	function getTable(container) {
+		container = document.querySelector('.main')
+		const userTable = parseFloat(document.getElementById('table__value').value)
+		let table = document.createElement('table')
+		table.style.cssText = 'border:1px solid'
+		for(let i = 0; i < userTable; i++) {
+			let scoresInpt = document.createElement('input')
+			scoresInpt.setAttribute('type', 'number')
+			table.appendChild(scoresInpt)
+		}
+		container.appendChild(table)
+		let getSumBtn = document.createElement('button')
+		getSumBtn.textContent = 'Знайти середнє значення'
+		container.appendChild(getSumBtn)
+		getSumBtn.onclick = () => {
+			getAvarage(container)
+		}
+	}
+
+	function getAvarage(container) {
+		container = document.querySelector('.result')
+		const numbers = document.querySelectorAll('table input')
+		let result = 0
+		for(let num of numbers) {
+			result += parseFloat(num.value)
+		}
+		const userResult = document.createElement('span')
+		userResult.textContent = `Середнє значення: ${result / numbers.length}`
+		container.appendChild(userResult)
+	}
+	window.onload = function () {
+		document.querySelector('#calculate').onclick = getTable
+	}
+
+</script>
+
+<body>
+	<h1>Задача 6. Користувач задає кількість оцінок і натискає на кнопку «get table».</h1>
+	<div class="main">
+		<label>
+			Задайте кількість оцінок
+			<input type="number" id="table__value" value="0">
+		</label>
+		<button id="calculate">Розрахувати</button>
+	</div>
+
+	<div class="result">
+
+	</div>
+
+
+</body>
+
+</html>

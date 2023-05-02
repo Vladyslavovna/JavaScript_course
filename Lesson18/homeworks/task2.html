@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Завдання 2</title>
+</head>
+
+<script>
+
+	function myFunc(usdRate,euroRate) {
+		usdRate = 35
+		euroRate = 41
+		const userInput = parseFloat(document.getElementById('grn').value)
+		const euroVal = userInput / euroRate
+		const usdVal = userInput / usdRate
+		document.getElementById('dollResult').innerHTML = usdVal.toFixed(2)
+		document.getElementById('euroResult').innerHTML = euroVal.toFixed(2)
+	}
+
+	window.onload = function () {
+		document.querySelector('#convert').onclick = myFunc
+	}
+
+</script>
+
+<style>
+	.main {
+		display: flex;
+		justify-content: center;
+		margin-bottom: 15px;
+	}
+
+	.line {
+		border: 1px solid black;
+		margin-bottom: 15px;
+	}
+
+	.result {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.title{
+		text-align: center;
+	}
+</style>
+
+<body>
+	
+	<h1 class="title">Задача 2. Конвертер валют</h1>
+	<div class="main">
+		<label> Сума в гривнях
+			<input type="number" id="grn" value="0">
+			<button id="convert">Конвертувати</button>
+		</label>
+	</div>
+	<div class="line"></div>
+
+	<div class="result">
+		<label>
+			Сума в долларах <span id="dollResult"></span>
+		</label>
+		<label>
+			Сума в євро <span id="euroResult"></span>
+		</label>
+	</div>
+
+</body>
+
+</html>

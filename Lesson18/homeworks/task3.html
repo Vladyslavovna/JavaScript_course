@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Завдання 3</title>
+</head>
+<script>
+
+	function myFunc(currentYear, date) {
+		date = new Date()
+		currentYear = date.getFullYear()
+		const userYear = parseInt(document.getElementById('year').value)
+		const resultYear = currentYear - userYear
+
+		document.getElementById('ress').innerHTML = resultYear
+	}
+
+	window.onload = function () {
+		document.querySelector('#convert').onclick = myFunc
+	}
+</script>
+
+
+<body>
+
+	<h1>Задача 3. Користувач задає рік народження. Визначити кількість років користувача.
+	</h1>
+
+	<div class="container">
+		<label>Введіть Ваш рік народження
+			<input type="number" value="0" id="year">
+		</label>
+		<button id="convert">Конвертувати</button>
+	</div>
+
+	<div class="result">
+		<label>
+			Ваш вік <span id="ress"></span>
+		</label>
+	</div>
+</body>
+
+</html>

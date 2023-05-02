@@ -138,21 +138,21 @@
 
 		class Library {
 			constructor() {
-				this.sections = {} //об"єкт для збереження книг по їх жанрам
-				this.originPublishers = {} //об"єкт для збереження книг по видавництвам
+				this.sections = {} 
+				this.originPublishers = {} 
 			}
 
 			//Додавання книги у бібліотеку та додавання її до відповідної секції
 			AddBook(booksList) {
-				for(let i = 0; i < booksList.length; i++) { //перебираємо всі книги
-					let currentBook = booksList[i] //записуємо книгу
-					if(!this.sections[currentBook.genre]) { //якщо такої секції немає
-						this.sections[currentBook.genre] = [] //то створюємо її
+				for(let i = 0; i < booksList.length; i++) { 
+					let currentBook = booksList[i] 
+					if(!this.sections[currentBook.genre]) { 
+						this.sections[currentBook.genre] = [] 
 					}
-					this.sections[currentBook.genre].push(currentBook) //додаємо книгу
+					this.sections[currentBook.genre].push(currentBook) 
 				}
 
-				for(let i = 0; i < booksList.length; i++) {    //так само тільки з видавництвом
+				for(let i = 0; i < booksList.length; i++) {   
 					let currentBook = booksList[i]
 					if(!this.originPublishers[currentBook.publisher.PublisherTitle]) {
 						this.originPublishers[currentBook.publisher.PublisherTitle] = []
@@ -164,16 +164,16 @@
 
 			//Вилучення книги з бібліотеки
 			RemoveBook(bookTitle) {
-				for(let book in this.sections) { //для кожної книги в секції
-					const books = this.sections[book] //знаходимо одну книгу
-					for(let i = 0; i < books.length; i++) { //ітеруємо в масиві книги
-						if(books[i].title === bookTitle) { //якщо назва книги співпадає з переданою в параметр назвою
-							books.splice(i, 1) //видаляємо цю книгу
+				for(let book in this.sections) { 
+					const books = this.sections[book] 
+					for(let i = 0; i < books.length; i++) { 
+						if(books[i].title === bookTitle) { 
+							books.splice(i, 1) 
 						}
 					}
 				}
 
-				for(let book in this.originPublishers) { //так само видаляємо її з секції з видавництвами
+				for(let book in this.originPublishers) { 
 					const books = this.originPublishers[book]
 					for(let i = 0; i < books.length; i++) {
 						if(books[i].title === bookTitle) {
@@ -185,14 +185,14 @@
 
 			//Наявність на даний час(Я буду шукати тільки в секціях))
 			IsAvailableNow(bookTitle) {
-				for(let book in this.sections) { //для кожної книги в секції
-					const books = this.sections[book]//знаходимо одну книгу
-					for(let i = 0; i < books.length; i++) {//ітеруємо в масиві книги
-						if(books[i].title === bookTitle)//якщо назва книги співпадає з переданою в параметр назвою
-							return console.log(true) //то така книга наявна і бібліотеці
+				for(let book in this.sections) {
+					const books = this.sections[book]
+					for(let i = 0; i < books.length; i++) {
+						if(books[i].title === bookTitle)
+							return console.log(true) 
 					}
 				}
-				return console.log(false) //інакше ні
+				return console.log(false) 
 			}
 
 			//Пошук книги за ім'ям автора
