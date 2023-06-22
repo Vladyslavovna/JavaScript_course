@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<style>
+	.box {
+		display: flex;
+		width: 500px;
+	}
+</style>
+
+<body>
+	<script>
+		// Дано 5 випадковим чином згенерованих нумерованих списків з рандомними числами(кількість елементів у списку випадкова від 1 до 10,
+		//  елементи випадкові – від 1 до 100).
+		//При натисненні на кнопку нумеровані списки з парною кількістю елементів зафарбувати у зелений колір, 
+		// інші у червоний.
+
+
+		class RandomLists {
+			constructor(minEl, maxEl, minNum, maxNum) {
+				this.minEl = minEl
+				this.maxEl = maxEl
+				this.minNum = minNum
+				this.maxNum = maxNum
+
+
+			}
+
+			getRandomNum() {
+				return Math.floor(Math.random() * (this.maxNum - this.minNum + 1) + this.minNum)
+			}
+
+			getRandomElement() {
+				return Math.floor(Math.random() * (this.maxEl - this.minEl + 1) + this.minEl)
+			}
+
+
+
+			render(targetSelector) {
+				const container = document.createElement('div')
+				this.ol = document.createElement('ol')
+
+				const randomLi = this.getRandomElement()
+
+				for(let i = 0; i < randomLi; i++) {
+					const li = document.createElement('li')
+					li.innerText = this.getRandomNum()
+					this.ol.append(li)
+				}
+				container.append(this.ol)
+
+				document.querySelector(targetSelector).append(container)
+			}
+		}
+
+		class Button {
+			getColor() {
+				const lists = document.querySelectorAll('li') //ствоюємо колекцію(псевдомасив) з елементами li
+
+				for(let i = 0; i < lists.length; i++) { //перебираємо колекцію(псевдомасив) з елементами li
+					const listLenght = lists[i].parentElement.children.length
+					if(listLenght % 2 === 0) {
+						lists[i].style.backgroundColor = 'green'
+					} else {
+						lists[i].style.backgroundColor = 'red'
+					}
+
+				}
+				// 	const listLenght = lists[i].parentElement.children.length			
+				//Эта строка находит количество дочерних элементов для родительского элемента каждого элемента списка li.
+
+				// В вашем коде lists[i] - это текущий элемент списка li, а parentElement - это родительский элемент,
+				//  который в данном случае является элементом ol.
+
+				// children - это свойство, которое возвращает коллекцию дочерних элементов для родительского элемента.
+				//  length - это свойство, которое возвращает количество элементов в этой коллекции.
+
+				// Таким образом, lists[i].parentElement.children.length возвращает количество элементов в списке ol,
+				//  к которому принадлежит текущий элемент li.
+			}
+			render(targetSelector) {
+				const button = document.createElement('button')
+				button.innerText = 'Зафарбувати'
+				button.onclick = this.getColor.bind(this)
+				document.querySelector(targetSelector).append(button)
+			}
+		}
+
+		window.onload = function () {
+			const colorButton = new Button()
+			colorButton.render('.box')
+
+			for(let i = 0; i < 5; i++) {
+				const r1 = new RandomLists(1, 10, 1, 100)
+				r1.render('.box')
+			}
+		}
+
+	</script>
+	<div class="box">
+
+
+	</div>
+</body>
+
+</html>

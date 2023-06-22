@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<style>
+	img {
+		width: 50px;
+		height: 50px;
+		transition: all 0.3s ease;
+	}
+
+	.box {
+		display: flex;
+		justify-content: space-between;
+	}
+	.dov{
+		position: relative;
+		border: 1px solid black;
+	}
+
+	.image-container {
+		padding: 50px;
+	}
+</style>
+
+<body class="body">
+	<div class="box">
+		<div class="dov1 dov"></div>
+		<div class="dov2 dov"></div>
+		<div class="dov3 dov"></div>
+	</div>
+
+	<script>
+		// 		Координата Х
+		// Координата У
+		// шлях до зображення
+		// інтервал оновлення
+
+		class Parent {
+			constructor(x, y, imgSrc, interval) {
+				this.x = x
+				this.y = y
+				this.imgSrc = imgSrc
+				this.interval = interval
+			}
+			//генерування елемента розмітки
+			render(targetSelector) {
+				const targetDiv = document.createElement('div')
+				this.imageContainer = document.createElement('div')
+				this.imageContainer.className = 'image-container'
+				this.image = document.createElement('img')
+				this.image.src = this.imgSrc
+				this.image.style.position = 'absolute'
+				this.image.style.left = this.x + 'px'
+				this.image.style.top = this.y + 'px'
+				this.imageContainer.append(this.image)
+				targetDiv.append(this.imageContainer)
+				document.querySelector(targetSelector).append(targetDiv)
+			}
+
+			move() {
+				setInterval(() => {
+					this.updateMove()
+				}, this.interval);
+			}
+		}
+
+		class House extends Parent {
+			constructor(x, y, imgSrc, interval, scaleStep) {
+				super(x, y, imgSrc, interval)
+				this.scale = 0.5 // початковий масштаб зображення
+				console.log(this.scale)
+				this.scaleStep = scaleStep // крок зміни масштабу
+				console.log(this.scaleStep)
+			}
+
+			updateMove() {
+				let step = this.scale + this.scaleStep // обраховуємо новий масштаб зображення
+				if(step > 1.5 || step < 0.5) {
+					this.scaleStep *= -1; // змінюємо напрямок збільшення/зменшення масштабу
+				}
+				this.scale += this.scaleStep
+				this.image.style.transform = `scale(${this.scale})` //встановлюємо новий масштаб зображення
+			}
+		}
+
+		//оновлення через вказаний інтервал (випадкове зміщення по горизонталі (зміна координати Х))
+		class Dog extends Parent {
+			constructor(x, y, imgSrc, interval, step) {
+				super(x, y, imgSrc, interval)
+				this.step = step // крок зміщення по горизонталі
+			}
+			updateMove() {
+				const containerWidth = this.imageContainer.offsetWidth // ширина контейнера
+				const imageWidth = this.image.offsetWidth //ширина зображення
+
+				this.x += this.step // збільшуємо координату Х на заданий крок
+
+				if(this.x < 0) {
+					this.x = 0;
+					this.step *= -1; // змінюємо напрямок руху
+				} else if(this.x + imageWidth > containerWidth) { //якщо координати по осі х + ширина картинки більша за ширину контейнера
+					this.x = containerWidth - imageWidth 
+					this.step *= -1; // змінюємо напрямок руху
+				}
+
+				this.image.style.left = this.x + 'px' // встановлюємо нову координату Х зображення
+			}
+		}
+
+		class Bird extends Parent {
+			constructor(x, y, imgSrc, interval, min, max) {
+				super(x, y, imgSrc, interval)
+				this.min = min
+				this.max = max
+
+			}
+
+			getRandomNumber(min, max) {
+				return min + Math.floor(Math.random() * (max - min + 1))
+			}
+
+			updateMove() {
+				const containerWidth = this.imageContainer.offsetWidth
+				const containerHeight = this.imageContainer.offsetHeight
+				const imageWidth = this.image.offsetWidth
+				const imageHeight = this.image.offsetHeight
+
+				const newX = Math.floor(Math.random() * (containerWidth - imageWidth)) // генеруємо нову координату Х
+				const newY = Math.floor(Math.random() * (containerHeight - imageHeight)) // генеруємо нову координату Y
+
+				this.image.style.left = newX + 'px' // встановлюємо нову координату Х зображення
+				this.image.style.top = newY + 'px'  // встановлюємо нову координату Y зображення
+			}
+
+
+		}
+
+		let r1 = new House(20, 20, './img-3.jpg', 100, 0.1)
+		r1.render('.dov2')
+		r1.move()
+
+		let h1 = new Dog(100, 100, './img-3.jpg', 100, 2)
+		h1.render('.dov1')
+		h1.move()
+
+		let u1 = new Bird(5, 5, './img-3.jpg', 600, 5, 10)
+		u1.render('.dov3')
+		u1.move()
+
+
+
+	</script>
+</body>
+
+</html>

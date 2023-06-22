@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<style>
+	.card {
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+		margin-bottom: 20px;
+		border: 1px solid black;
+	}
+</style>
+
+<body>
+
+	<script>
+		class Card {
+			constructor(imgScr, imgWidth, imgHeight, title, price, productManager) {
+				this.imgScr = imgScr
+				this.imgWidth = imgWidth
+				this.imgHeight = imgHeight
+				this.title = title
+				this.price = price
+				this.productManager = productManager
+				this.counter = 0
+			}
+
+			increaseCounter() {
+				this.counter++
+				this.counterEvent()
+				this.counterDisplay.innerText = this.counter;
+
+				console.log(this.counter)
+			}
+
+			decreaseCounter() {
+				if(this.counter > 0) {
+					this.counter--
+					this.counterEvent()
+				}
+				this.counterDisplay.innerText = this.counter;
+
+			}
+
+			removeProduct(product) {
+				const index = this.productManager.products.indexOf(product)
+				if(index !== -1) {
+					this.productManager.products.splice(index, 1)
+					this.productManager.updatePrice()
+					const event = new CustomEvent('remove', {
+						detail: {
+							product: product
+						}
+					})
+					window.dispatchEvent(event);
+				}
+				this.container.remove();
+			}
+			counterEvent() {
+				const event = new CustomEvent('amountChanged', {
+					detail: {
+						product: this,
+					}
+				})
+				window.dispatchEvent(event)
+			}
+			render(targetSelector) {
+				this.container = document.createElement('div')
+				this.container.className = 'card'
+				const image = document.createElement('img')
+				image.src = this.imgScr
+				image.width = this.imgWidth
+				image.height = this.imgHeight
+				this.container.append(image)
+
+				const title = document.createElement('span')
+				title.innerText = this.title
+				this.container.append(title)
+
+
+
+				this.addButton = document.createElement('button')
+				this.addButton.innerText = '+'
+				this.container.append(this.addButton)
+
+				this.minusButton = document.createElement('button')
+				this.minusButton.innerText = '-'
+				this.container.append(this.minusButton)
+
+
+				this.counterDisplay = document.createElement('span');
+				this.counterDisplay.innerText = this.counter;
+				this.container.append(this.counterDisplay);
+
+				const price = document.createElement('span')
+				price.innerText = this.price + ' $'
+				this.container.append(price)
+
+				this.removeButton = document.createElement('button');
+				this.removeButton.innerText = 'Remove';
+				this.container.append(this.removeButton);
+
+				this.removeButton.addEventListener('click', () => {
+					this.removeProduct(this);
+				});
+
+
+
+
+				document.querySelector(targetSelector).append(this.container)
+			}
+			attachIncreaseHandler() {
+				this.addButton.addEventListener('click', this.increaseCounter.bind(this));
+			}
+
+			attachDecreaseHandler() {
+				this.minusButton.addEventListener('click', this.decreaseCounter.bind(this));
+			}
+
+		}
+
+		class ProductManager {
+			constructor() {
+				this.products = []
+				this.totalPrice = 0
+				this.initEvent()
+			}
+
+			addProduct(product) {
+				this.products.push(product)
+				this.updatePrice()
+				const event = new CustomEvent('add', {
+					detail: {
+						product: product
+					}
+				})
+				window.dispatchEvent(event)
+			}
+
+
+			decreaseAmount() {
+				this.products.forEach(product => {
+					if(product.counter > 0) {
+						product.counter--;
+						product.counterEvent();
+					}
+				});
+				const event = new CustomEvent('minus', {
+					detail: {
+						product: this
+					}
+				});
+				window.dispatchEvent(event);
+			}
+
+			updatePrice() {
+				this.totalPrice = this.products.reduce((total, product) => {
+					return total + product.price * product.counter
+				}, 0)
+				document.getElementById('totalPrice').innerText = this.totalPrice
+			}
+
+			initEvent() {
+				window.addEventListener('add', (event) => {
+					const product = event.detail.product;
+					this.updatePrice();
+					console.log(`Quantity changed for product ${product.title}`);
+					console.log(`New total price: ${this.totalPrice}`);
+				});
+			}
+
+
+		}
+
+
+
+
+		window.onload = function () {
+			const cards = [
+				new Card('./img-3.jpg', 50, 50, 'BMW', 1000),
+				new Card('./img-3.jpg', 50, 50, 'Mercedes', 1200),
+				new Card('./img-3.jpg', 50, 50, 'Audi', 950)
+			];
+
+			const productManager = new ProductManager(); // Создаем экземпляр ProductManager
+
+			cards.forEach(card => {
+				card.render('.box');
+				productManager.addProduct(card);
+				card.attachIncreaseHandler();
+				card.attachDecreaseHandler();
+				card.productManager = productManager
+			});
+
+
+			// Добавляем обработчик события 'amountChanged' для обновления totalPrice
+			window.addEventListener('amountChanged', (event) => {
+				productManager.updatePrice();
+			});
+		};
+
+	</script>
+	<div class="box"></div>
+	<h2> Загалом до оплати: 
+		<span id="totalPrice"></span>
+	</h2>
+</body>
+
+</html>

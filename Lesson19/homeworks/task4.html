@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<style>
+	body {
+		background-color: black;
+		overflow: hidden;
+	}
+
+	.star {
+		position: absolute;
+		display: block;
+		background-color: white;
+		border-radius: 50%;
+		box-shadow: 0 0 5px 5px rgba(255, 255, 0, 0.5);
+	}
+</style>
+<script>
+	class Star {
+		constructor(min, max) {
+			this.starsArr = [] //массив зірок(я буду їх сюди додавати)
+			this.min = min //розмір зірок
+			this.max = max
+		}
+
+		createStar(containerId) {
+			const targetContainer = document.getElementById(containerId)
+
+			let star = document.createElement('span')
+			star.className = 'star'
+			targetContainer.append(star)
+
+			let startStarWidth = Math.floor(Math.random() * (this.max - this.min)) + this.min
+			star.style.width = startStarWidth + 'px'
+			star.style.height = star.style.width
+			const position = this.generateRandomPositin()
+			star.style.left = `${position.x}px`
+			star.style.top = `${position.y}px`
+
+			this.starsArr.push(star)
+
+			const startAnimation = setInterval(() => {
+				this.increaseSize(star)
+				if(parseInt(star.style.width) >= this.max) {
+					clearInterval(startAnimation)
+					this.removeStar(star)
+					this.createStar(containerId)
+				}
+			}, 1000)
+		}
+
+		removeStar(star) {
+			star.remove()
+			this.starsArr = this.starsArr.filter((el) => el !== star)
+		}
+
+		generateRandomPositin() {
+			let x = Math.floor(Math.random() * window.innerWidth)
+			let y = Math.floor(Math.random() * window.innerHeight)
+			return {
+				x,
+				y
+			}
+		}
+
+		setPosition(star) {
+			const currentPos = this.generateRandomPositin()
+			star.style.left = `${currentPos.x}px`
+			star.style.top = `${currentPos.y}px`
+		}
+
+		increaseSize(star) {
+			let currentSize = parseInt(star.style.width)
+			let newSize = currentSize + 1
+			star.style.width = newSize + 'px'
+			star.style.height = newSize + 'px'
+
+		}
+	}
+
+	window.onload = function () {
+		for(let i = 0; i < 50; i++) {
+			let star = new Star(3, 20)
+			star.createStar('container')
+		}
+
+	}
+</script>
+
+<body>
+	<div id="container">
+
+	</div>
+</body>
+
+</html>

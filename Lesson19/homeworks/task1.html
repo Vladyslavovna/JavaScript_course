@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<style>
+	#container {
+		display: flex;
+	}
+
+	.main__container {
+		text-align: center;
+	}
+
+	.main__image {
+		margin-right: 10px;
+	}
+</style>
+<script>
+	// Задача 1. Відображаємо картки товарів, які користувач може вибирати.Вибраний товар має зелену рамку
+
+	class Cards {
+		constructor({ imageSrc, title, price }) {
+			this.imageSrc = imageSrc
+			this.title = title
+			this.price = price
+			this.selectedCard = 0
+		}
+
+		render(containerId) {
+			this.mainContainer = document.createElement('div')
+			this.mainContainer.className = 'main__container'
+
+			const image = document.createElement('img')
+			image.className = 'main__image'
+			image.src = this.imageSrc
+			this.mainContainer.append(image)
+
+			const cardTitle = document.createElement('h3')
+			cardTitle.className = 'card__title'
+			cardTitle.innerText = this.title
+			this.mainContainer.append(cardTitle)
+
+			const cardPrice = document.createElement('span')
+			cardPrice.className = 'card__price'
+			cardPrice.innerText = this.price
+			this.mainContainer.append(cardPrice)
+
+			this.mainContainer.onclick = this.onhover()
+
+			const targetContainer = document.getElementById(containerId)
+			targetContainer.append(this.mainContainer)
+		}
+
+		onhover() {
+			let cardClicked = false
+
+			return () => {
+				if(cardClicked) {
+					this.mainContainer.style.border = ''
+					cardClicked = false
+				} else {
+					this.mainContainer.style.border = '3px solid green'
+					cardClicked = true
+				}
+			}
+		}
+
+
+	}
+
+	const linksSet = [
+		{
+			imageSrc: './img-1.jpg',
+			title: 'Монітор',
+			price: '25.000',
+		},
+		{
+			imageSrc: './img-2.jpg',
+			title: 'Клавіатура',
+			price: '1000',
+		},
+		{
+			imageSrc: './img-3.jpg',
+			title: 'Миша',
+			price: '500',
+		},
+	]
+
+	window.onload = function () {
+		for(const data of linksSet) {
+			new Cards(data).render('container')
+		}
+	}
+
+</script>
+
+<body>
+	<h1 class="title">
+	Завдання 1.	Відображаємо картки товарів, які користувач може вибирати.Вибраний товар має зелену рамку
+	</h1>
+	<div id="container"></div>
+</body>
+
+</html>

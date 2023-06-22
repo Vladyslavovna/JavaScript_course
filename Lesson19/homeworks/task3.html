@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<style>
+	body {
+		overflow: hidden;
+	}
+
+	img {
+		width: 50px;
+		position: absolute;
+	}
+</style>
+
+<body>
+	<div class="box">
+		<div id="container"></div>
+	</div>
+</body>
+<script>
+	// Відобразити падаючий сніг.
+	// Сніжинка з’являється у верхній частині екрану і з випадковою швидкістю рухається вниз.
+	// Як тільки Сніжинка з’являється у верхній частині екрану і з випадковою швидкістю рухається вниз.
+	// Як тільки сніжинка досягає нижньої частини екрану вона знову повинна з’явитись у верхній частині екрану.
+
+	class SnowFlake {
+		constructor(imgData) {
+			this.imgData = imgData
+
+		}
+
+		createImage(containerId) {
+			const targetContainer = document.getElementById(containerId)
+
+			for(let imageSrc of this.imgData) {
+				const snowflakeImage = document.createElement('img')
+				snowflakeImage.src = imageSrc
+				targetContainer.append(snowflakeImage)
+				snowflakeImage.onload = () => {
+					this.moveImage(snowflakeImage)
+				}
+			}
+		}
+
+		// moveImage(snowflakeImage) {
+		// 	let x = Math.floor(Math.random() * window.innerWidth)
+		// 	let y = - snowflakeImage.height
+		// 	let speed = 1
+
+		// 	function animate() {
+		// 		y += speed
+		// 		if(y > window.innerHeight) {
+		// 			y = - snowflakeImage.height
+		// 			x = Math.floor(Math.random() * (window.innerWidth - snowflakeImage.width))
+		// 		}
+		// 		snowflakeImage.style.transform = `translate(${x}px, ${y}px)`;
+		// 		requestAnimationFrame(animate)
+		// 	}
+		// 	animate()
+		// }
+
+		moveImage(snowflakeImage) {
+			let x = Math.floor(Math.random() * window.innerWidth);
+			let y = -snowflakeImage.height;
+			let speed = 1;
+
+			const moveInterval = setInterval(() => {
+				y += speed;
+				if(y > window.innerHeight) {
+					y = -snowflakeImage.height;
+					x = Math.floor(Math.random() * (window.innerWidth - snowflakeImage.width));
+				}
+				snowflakeImage.style.transform = `translate(${x}px, ${y}px)`;
+			}, 16); // Кожні 16 мс (приблизно 60 кадрів в секунду)
+
+			// Зупинити рух сніжинки при видаленні зображення з контейнера
+			snowflakeImage.onremove = () => {
+				clearInterval(moveInterval);
+			};
+		}
+		render(snowFlakeData) {
+			snowFlakeData = this.imgData
+			let image = new SnowFlake(snowFlakeData)
+			image.createImage('container')
+		}
+	}
+
+	let data = [
+		'./snowflake1.svg',
+		'./snowflake2.svg',
+		'./snowflake3.svg',
+	]
+
+
+
+	window.onload = function () {
+		let snowFlake = new SnowFlake(data);
+		const intervalId = setInterval(() => {
+			snowFlake.render(data);
+		}, 2000);
+	};
+
+
+
+
+</script>
+
+</html>

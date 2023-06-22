@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<script>
+		//Дано 3 таблиці розмірності 3*3 з випадковими числами.
+
+		class Tables {
+			constructor(elAmount, min, max) {
+				this.min = min
+				this.max = max
+				this.elAmount = elAmount
+
+			}
+
+			//генерация рандомного числа для клеточки
+			getRandomNum() {
+				return Math.floor(Math.random() * (this.max - this.min + 1) + this.min)
+			}
+
+			createElement() {
+				const tr = document.createElement('tr')
+				for(let i = 0; i < this.elAmount; i++) {
+					const td = document.createElement('td')
+					td.innerText = this.getRandomNum()
+					td.style.border = '1px solid black'
+					tr.append(td)
+				}
+				return tr
+
+			}
+			render(targetSelector, amount, resultSpan) {
+				const container = document.createElement('div')
+				this.table = document.createElement('table')
+				this.table.style.border = '2px solid black'
+				for(let i = 0; i < amount; i++) {
+					this.table.append(this.createElement())
+				}
+
+				const counterDiv = document.createElement('div')
+				counterDiv.append(resultSpan)
+
+
+
+
+				container.append(this.table, counterDiv)
+				document.querySelector(targetSelector).append(container)
+			}
+		}
+
+		//Якщо відбувається клік на якійсь із клітинок, то до відповідної таблиці додається червона рамка 
+
+		class OnTablesClick {
+
+			borderOnClick() {
+				const table = document.querySelectorAll('table')
+				for(let i = 0; i < table.length; i++) {
+					const td = table[i].querySelectorAll('td')
+					for(let j = 0; j < td.length; j++) {
+						td[j].onclick = function () {
+							table[i].style.border = '2px solid red'
+						}
+					}
+
+				}
+			}
+
+			clickCounter(resultSpan) {
+				const table = document.querySelectorAll('table')
+				let counter = 0
+				for(let i = 0; i < table.length; i++) {
+					table[i].addEventListener('click', () => {
+						counter++
+						resultSpan.innerText = `Кількість кліків = ${counter}`
+
+					})
+				}
+			}
+
+		}
+		window.onload = function () {
+			const resultSpan = document.createElement("span");
+			const tables = new Tables(3, 1, 10);
+			tables.render(".box", 3, resultSpan);
+			const onTablesClick = new OnTablesClick();
+			onTablesClick.borderOnClick();
+			onTablesClick.clickCounter(resultSpan);
+		};
+
+	</script>
+	<div class="box"></div>
+</body>
+
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<script>
+		class Car {
+			constructor(brand, year, price) {
+				this.brand = brand;
+				this.year = year;
+				this.price = price;
+			}
+		}
+
+		class Filter {
+			constructor(cars) {
+				this.cars = cars
+				this.brands = this.getUniqueValue('brand')
+				this.years = this.getUniqueValue('year')
+				this.prices = this.getUniqueValue('price')
+			}
+
+			getUniqueValue(val) {
+				const uniqueVal = []
+				this.cars.forEach((car) => {
+					if(!uniqueVal.includes(car[val])) {
+						uniqueVal.push(car[val])
+					}
+				})
+				return uniqueVal
+			}
+			getSelectedVal(id) {
+				const dropdown = document.getElementById(id)
+				return dropdown.value
+			}
+
+			displayFilteredCars(filteredCars) {
+				const carList = document.createElement('div')
+				carList.innerHTML = ''
+
+				filteredCars.forEach((car) => {
+					const el = document.createElement('div')
+					el.append(`${car.brand} ${car.year} ${car.price}`)
+					carList.append(el)
+				})
+				const filteredDiv = document.getElementById('filtered-container')
+				filteredDiv.innerHTML = ''
+				filteredDiv.append(carList)
+			}
+
+			applyFilter() {
+				const selectedBrand = this.getSelectedVal('brand')
+				const selectedYear = this.getSelectedVal('year')
+				const selectedPrice = this.getSelectedVal('price')
+
+				const filteredCars = this.cars.filter((car) => {
+					if(
+						(selectedBrand === 'Усі' || car.brand === selectedBrand) &&
+						(selectedYear === 'Усі' || car.year.toString() === selectedYear) &&
+						(selectedPrice === 'Усі' || car.price.toString() === selectedPrice)
+					) {
+						return true
+					}
+					return false
+				})
+				this.displayFilteredCars(filteredCars)
+			}
+			createFilters() {
+				const filteredContainer = document.createElement('div')
+
+
+				this.filteredData = [
+					{
+						id: 'brand', label: 'Марка: ', options: ['Усі', ...this.brands]
+					},
+					{
+						id: 'year', label: 'Рік випуску: ', options: ['Усі', ...this.years]
+					},
+					{
+						id: 'price', label: 'Ціна: ', options: ['Усі', ...this.prices]
+					},
+				]
+
+				this.filteredData.forEach(({ id, label, options }) => {
+					const filterTitle = document.createElement('title')
+					filterTitle.innerText = label
+					filteredContainer.append(filterTitle)
+
+					const filterMenu = document.createElement('select')
+					filterMenu.id = id
+
+					options.forEach((option) => {
+						const filterOption = document.createElement('option')
+						filterOption.value = option
+						filterOption.innerText = option
+						filterMenu.append(filterOption)
+					})
+
+					filterMenu.addEventListener('change', () => {
+						this.applyFilter()
+					})
+					filteredContainer.append(filterMenu)
+				})
+				return filteredContainer
+			}
+
+			render(targetSelector) {
+				const targetElement = document.getElementById(targetSelector);
+				targetElement.append(this.createFilters());
+			}
+		}
+
+		const carList = [
+			new Car('BMW', 2019, 50000),
+			new Car('Audi', 2020, 60000),
+			new Car('Mercedes', 2021, 70000),
+			new Car('BMW', 2020, 55000),
+			new Car('Audi', 2019, 52000),
+			new Car('Tesla', 2021, 80000),
+		];
+
+		window.onload = function () {
+			const filter = new Filter(carList)
+			filter.render('box')
+			filter.displayFilteredCars(carList)
+		}
+
+	</script>
+	<div id="box"></div>
+	<div id="filtered-container"></div>
+</body>
+
+</html>

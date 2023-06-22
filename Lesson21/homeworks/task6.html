@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<style>
+
+</style>
+
+<body>
+	<script>
+
+		// Динамічний пошук.
+		// Є список працівників і поле пошуку.При введенні відображаються усі, які містять вказаний фрагмент
+
+		class Employee {
+			constructor(name, sername) {
+				this.name = name
+				this.sername = sername
+			}
+		}
+
+		class SearchForm {
+			constructor(employees) {
+				this.employees = employees
+				this.filteredEmployees = employees
+			}
+
+			createForm(targerSelector) {
+				const container = document.createElement('div')
+
+				const label = document.createElement('label')
+				label.innerText = 'Я шукаю...'
+				this.input = document.createElement('input')
+				this.input.placeholder = 'Введіть фрагмент'
+				this.input.addEventListener('input', this.search.bind(this))
+				label.append(this.input)
+
+
+				container.append(label)
+
+				this.resultDiv = document.createElement('div')
+				this.employees.forEach(employee => {
+					const employeeDiv = document.createElement('div')
+					employeeDiv.innerText = `${employee.name} ${employee.sername}`
+					this.resultDiv.append(employeeDiv)
+				});
+				container.append(this.resultDiv)
+
+				document.querySelector(targerSelector).append(container)
+				return container
+
+			}
+
+
+			displayResults() {
+				this.resultDiv.innerHTML = ''
+
+				this.filteredEmployees.forEach(employee => {
+					const employeeEl = document.createElement('div')
+					employeeEl.innerText = `${employee.name} ${employee.sername}`
+					this.resultDiv.append(employeeEl)
+				})
+			}
+
+			search(event) {
+				const inpVal = event.target.value.toLowerCase()
+				this.filteredEmployees = this.employees.filter(employee =>
+					employee.name.toLowerCase().includes(inpVal) || employee.sername.toLowerCase().includes(inpVal)
+				)
+				this.displayResults()
+			}
+
+		}
+
+
+		const employees = [
+			new Employee('Ivan', 'Ivanov'),
+			new Employee('Petr', 'Petrov'),
+			new Employee('Sidor', 'Sidorov'),
+			new Employee('Alena', 'Guseva'),
+			new Employee('Inna', 'Omegich')
+		];
+
+
+		window.onload = function () {
+			const searchForm = new SearchForm(employees);
+			searchForm.createForm('.box');
+		}
+	</script>
+	<div class="box"></div>
+</body>
+
+</html>

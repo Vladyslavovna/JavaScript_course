@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<div class="box">
+	<label>
+		<input type="number">
+	</label>
+	<label>
+		<input type="number">
+	</label>
+	<label>
+		<input type="number">
+	</label>
+	<label>
+		<input type="number">
+	</label>
+	<label>
+		<input type="number">
+	</label>
+
+
+</div>
+
+<body>
+	<script>
+		//  Дано 5 елементів input.
+		//  При введенні значення у якийсь із них необхідно автоматично заповнювати
+		//  інші (усі попередні у спадному порядку(кожен попередній має значення на 1 менше за наступний),
+		//  усі наступні на 1 більше (кожен наступне на 1 більше за попереднього)
+
+		function onInputClick() {
+			let input = this //this - це адреса елемента, який згенерував подію
+			let counter = input.value //створюю лічільник
+			let label = input.parentElement
+			//зберігається посилання на батьківський елемент поля вводу, тобто на мітку, що містить це поле вводу
+			//коли потрібно знайти наступну або попередню мітку, змінна label оновлюється наступною або попередньою міткою,
+			//  використовуючи методи nextElementSibling або previousElementSibling.
+			//   Змінна label також використовується для пошуку першого поля вводу всередині кожної мітки.
+
+			while(label.nextElementSibling) { //поки є наступний вузол
+				label = label.nextElementSibling
+				const nextInp = label.firstElementChild //знаходимо інпут всередені лейбла
+				counter++ //збільшуємо каунтер
+				nextInp.value = counter //присвоюємо значення каунтера інпуту
+			}
+
+			while(label.previousElementSibling) {
+				label = label.previousElementSibling
+				const prevInp = label.firstElementChild
+				counter--
+				prevInp.value = counter
+
+			}
+		}
+		const div = document.querySelector('.box')
+		for(const label of div.children) {
+			for(const input of label.children) {
+				input.oninput = onInputClick
+			}
+
+		}
+// Ця функція onInputClick() викликається кожен раз, коли користувач вводить текст в поле вводу
+// всередині блоку з класом.box.
+
+// Спочатку функція отримує посилання на поле вводу, на яке користувач натиснув,
+// використовуючи this.Далі функція отримує початкове значення лічильника з поточного поля вводу,
+// використовуючи свойство value.
+// Потім функція шукає наступні поля вводу всередині.box.Вона це робить у циклі while,
+// перебираючи кожну мітку, що йде після поточної мітки label,
+// та знаходячи перше поле вводу всередині кожної мітки.
+// Для кожного з цих полів вводу функція збільшує значення лічильника на 1
+// та оновлює вміст поля вводу на нове значення лічильника.
+// Після того, як функція оновила значення лічильника для всіх наступних полів вводу,
+// вона повторює той самий процес для попередніх полів вводу, перебираючи мітки label,
+// що йдуть перед поточною міткою.
+// У результаті, коли користувач вводить текст в поле вводу,
+// значення лічильника змінюється для всіх наступних і попередніх полів вводу,
+//а також відповідних міток.
+	</script>
+</body>
+
+</html>

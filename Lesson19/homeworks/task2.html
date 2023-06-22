@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<style>
+	#container1,
+	#container2 {
+		border: 1px solid black;
+		width: 200px;
+	}
+
+	li {
+		list-style: none;
+		border: 1px solid black;
+		display: block;
+		justify-content: space-between;
+		width: 100px;
+	}
+
+	.green__btn {
+		background-color: greenyellow;
+	}
+
+	.red__btn {
+		background-color: crimson;
+	}
+</style>
+
+<script>
+
+	class Sportsmens {
+		constructor(sportsmenData) {
+			this.sportsmenData = sportsmenData // зберігаємо список спортсменів
+			this.selectedSportsmens = [] // зберігаємо масив куди будуть додаватися вибрані спортсмени
+		}
+
+
+		//метод для генерації списку
+		createSportsmensList(containerId, status) {
+			const sportsmanList = document.createElement('ul')
+			let sportsmen //описую змінну(спортсмена)
+			if(status === true) { //якщо спортсмен вибраний
+				sportsmen = this.selectedSportsmens //то присвоюємо змінній масив вибраних спортсменів
+			} else {//а якщо ні
+				sportsmen = this.sportsmenData //то основний список
+			}
+			for(let athlete of sportsmen) {
+				sportsmanList.append(this.createCard(athlete, status));
+			}
+			const targetContainer = document.getElementById(containerId);
+			targetContainer.innerHTML = '' // Очищаем содержимое контейнера перед добавлением списка
+			targetContainer.append(sportsmanList);
+		}
+
+		//метод для генерації карточки для кожного спортсмена,а також методи їх переміщення
+		createCard(sportsmen, status) { //в якості аргументів передаємо спортсмена,та статус (true - вибраний, false - не вибраний)
+
+			let sportsmanCard = document.createElement('li')
+			sportsmanCard.innerText = sportsmen
+
+			if(status) { //якщо спортсмен обраний у список змагань
+				let redButton = document.createElement('button')
+				redButton.className = 'red__btn'  //описуємо червону кнопку
+				redButton.innerText = 'Повернути'
+				redButton.onclick = this.moveSportsmen.bind(this, sportsmen, false)
+				sportsmanCard.append(redButton) //і додаємо до картки
+			} else {
+				let greenArrow = document.createElement('button')
+				greenArrow.className = 'green__btn'
+				greenArrow.innerText = 'Вибрати'
+				greenArrow.onclick = this.moveSportsmen.bind(this, sportsmen, true)
+				sportsmanCard.append(greenArrow)
+			}
+			return sportsmanCard
+		}
+
+		//метод для переміщення вибраних спортсменів
+		moveSportsmen(sportsmen, selected) {
+			let index
+			if(selected) {
+				index = this.sportsmenData.indexOf(sportsmen)
+			} else {
+				index = this.selectedSportsmens.indexOf(sportsmen)
+			}
+
+			if(selected && index !== -1) { //якщо спортсмен вибраний (тобто статус === тру)
+				this.sportsmenData.splice(index, 1) //виріраємо з основного списку
+				this.selectedSportsmens.push(sportsmen) //додаємо у другий масив
+			} else if(!selected && index !== -1) {
+				this.selectedSportsmens.splice(index, 1) //і навпаки
+				this.sportsmenData.push(sportsmen)
+			}
+			this.createSportsmensList('container1', false)
+			this.createSportsmensList('container2', true)
+		}
+	}
+
+	//Вызовы createSportsmensList внутри метода moveSportsmen служат для обновления списков спортсменов после перемещения спортсмена из одного списка в другой.
+	// После того, как спортсмен перемещается(когда вы нажимаете на кнопку "Вибрати" или "Повернути"), метод moveSportsmen изменяет состояние массивов sportsmenData и selectedSportsmens в соответствии с перемещением.Затем он вызывает createSportsmensList для двух контейнеров, container1 и container2, с соответствующими значениями status.
+	// Вызов createSportsmensList('container1', false) обновляет список всех спортсменов, которые не были выбраны, в контейнере с идентификатором container1.А вызов createSportsmensList('container2', true) обновляет список всех выбранных спортсменов в контейнере с идентификатором container2.
+	// Таким образом, после каждого перемещения спортсмена метод createSportsmensList обновляет отображение списков, чтобы отразить текущее состояние спортсменов.
+
+	window.onload = function () {
+		const sportsmenData = ['Iven', 'Ivan', 'Igor', 'Ivan']
+		const sportsmen = new Sportsmens(sportsmenData)
+		sportsmen.createSportsmensList('container1', false)
+		sportsmen.createSportsmensList('container2', true)
+	}
+
+
+</script>
+
+<body>
+	<div class="container">
+		<h2>Список спортсменів</h2>
+		<div id="container1"></div>
+		<h2>Обрані до змагань</h2>
+		<div id="container2"></div>
+	</div>
+</body>
+
+</html>

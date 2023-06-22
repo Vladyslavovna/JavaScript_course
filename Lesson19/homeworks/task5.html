@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<style>
+	body {
+		overflow: hidden;
+	}
+
+	img {
+		width: 300px;
+		position: absolute;
+		top: -100px;
+	}
+</style>
+
+<script>
+
+	class Tank {
+		constructor(imgData) {
+			this.imgData = imgData
+		}
+
+		createTank(containerId) {
+			const targetContainer = document.getElementById(containerId)
+
+			for(let imageSrc of this.imgData) {
+				const tankImage = document.createElement('img')
+				tankImage.src = imageSrc
+				targetContainer.append(tankImage)
+				tankImage.onclick = () => {
+					this.click(tankImage)
+				}
+				this.animate(tankImage)
+			}
+
+
+		}
+
+
+		click(tankImage) {
+			tankImage.src = './klass-1.jpg';
+			tankImage.classList.add('boom');
+			this.animate(tankImage); // Перемещение вызова функции animate перед удалением элемента
+			setTimeout(() => {
+				tankImage.remove();
+			}, 2000);
+		}
+
+		animate(tankImage) {
+			let y = -tankImage.height
+			let x = Math.floor(Math.random() * window.innerWidth)
+			let speed = 1;
+			const animateInterval = setInterval(() => {
+				y += speed;
+				if(y > window.innerHeight + tankImage.height) {
+					clearInterval(animateInterval);
+				} else {
+					tankImage.style.transform = `translate(${x}px, ${y}px)`
+				}
+			}, 30);
+		}
+
+	}
+
+	let data = [
+		'./govno-1.jpg'
+	]
+
+	window.onload = function () {
+		let tank = new Tank(data)
+		const interval = setInterval(() => {
+			tank.createTank("container")
+		}, 3000)
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+<body>
+	<div id="container">
+
+	</div>
+
+</body>
+
+</html>

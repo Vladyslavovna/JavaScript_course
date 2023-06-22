@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<script>
+		//Створити клас Client
+		// Властивості:
+		// ID
+		// ПІБ
+		// Кількість грошей на рахунку
+		// Методи:
+		// Додавання грошей
+		// Зняття грошей
+		// ToString
+
+		class Client {
+			constructor(id, fullName, balance) {
+				this.id = id
+				this.fullName = fullName
+				this.balance = balance
+			}
+
+			addToBalance(amount) {
+				this.balance += amount
+			}
+
+			removeFromBalance(amount) {
+				this.balance -= amount
+			}
+
+			toString() {
+				return `Клієнт: Ід ${this.id} ПІБ ${this.fullName} Баланс ${this.balance}`
+			}
+		}
+
+		// 		На основі цього класу створити клас GoldenClient
+		// Властивості
+		// ID
+		// ПІБ
+		// Кількість грошей на рахунку
+		// Ліміт кредитних коштів
+		// Відсоток за використання кредитних коштів
+		// Методи
+		// Додавання грошей
+		// Зняття грошей
+		// Визначення пені за використання кредитних коштів
+		// ToString
+
+		class GoldenClient extends Client {
+			constructor(id, fullName, balance, limit, percent) {
+				super(id, fullName, balance)
+				this.limit = limit
+				this.percent = percent
+			}
+
+
+			calculatePenalty() {
+				return (amount * this.percent) / 100
+			}
+			toString() {
+				// Перезаписуємо метод toString() з базового класу
+				return `Прем-клієнт:  ІД ${this.id}  ПІБ${this.fullName} Баланс ${this.balance} Ліміт кредитних коштів ${this.limit} пені за використання кредитних коштів ${this.percent}`;
+			}
+		}
+
+		// 		Створити клас Bank, у якому зберігається масив клієнтів.Виконати такі операції
+		// Вивести усіх простих клієнтів;
+		// Вивести усіх клієнтів GoldenClient;
+		// Знати сумарну кількість грошей на рахунку;
+
+		class Bank {
+			constructor(clientsList) {
+				this.clientsList = clientsList
+				this.premClient = []
+				this.regularClient = []
+				this.totalSum = 0
+			}
+
+			getRegularClient() {
+				for(const client of this.clientsList) {
+					if(client instanceof Client && !(client instanceof GoldenClient)) {
+						this.regularClient.push(client)
+					}
+				}
+				return this.regularClient
+			}
+
+			getGoldenClient() {
+				for(const client of this.clientsList) {
+					if(client instanceof GoldenClient) {
+						this.premClient.push(client)
+					}
+				}
+				return this.premClient
+			}
+
+			getTotalSum() {
+				for(const client of this.clientsList) {
+					this.totalSum += client.balance
+				}
+				return this.totalSum
+			}
+		}
+
+
+		let clientsList = [
+			new Client(1, 'Ivan', 1000),
+			new Client(2, 'Petr', 2000),
+			new GoldenClient(3, 'Sveta', 3000, 500, 1),
+			new GoldenClient(4, 'Vasya', 4000, 1000, 2),
+		]
+
+		let bank = new Bank(clientsList);
+
+		let regularClients = bank.getRegularClient();
+		console.log(regularClients); // Виведе масив з простими клієнтами
+
+		let goldenClients = bank.getGoldenClient();
+		console.log(goldenClients); // Виведе масив з клієнтами GoldenClient
+
+		let totalSum = bank.getTotalSum();
+		console.log(`Загальна кількість грошей на рахунках:${totalSum}`); // Виведе сумарну кількість грошей на рахунках
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<script>
+		// Користувач задає місяць навчання учня(перевіряти чи є числом, чи від 1 до 12, чи не канікули)
+		//  та оцінку(перевіряти чи є числом, чи від 1 до 100).
+		//  Вивести чи зможе він виправити оцінку(якщо оцінка погана і це не останній місяць у семестрі).
+		//  Обробку усіх помилок зробити з використанням відповідних класів.
+
+
+		class IsANumber extends Error {
+			constructor() {
+				super()
+				this.message = 'Має бути числом'
+				this.name = 'IsNotANumber'
+			}
+		}
+
+		class IsFrom1To12 extends Error {
+			constructor() {
+				super()
+				this.message = 'Має бути числом від 1 до 12'
+				this.name = 'IsNotFrom1To12'
+			}
+		}
+
+		class IsAHoliday extends Error {
+			constructor() {
+				super()
+				this.message = 'Зараз канікули'
+				this.name = 'IsAHoliday'
+			}
+		}
+
+		class CheckGrade extends Error {
+			constructor() {
+				super()
+				this.message = 'Має бути числом від 1 до 100'
+				this.name = 'CheckGrade'
+			}
+		}
+
+		let grade = parseInt(prompt('Введіть оцінку'))
+		let month = parseInt(prompt('Введіть місяць'))
+
+		function checkGrade(grade, month) {
+			try {
+				if(isNaN(month)) throw new IsANumber()
+				else if(month < 1 || month > 12) throw new IsFrom1To12()
+				else if(month >= 6 && month <= 8) throw new IsAHoliday()
+
+				if(isNaN(grade)) throw new IsANumber()
+				else if(grade < 1 || grade > 100) throw new CheckGrade()
+
+				if(grade < 60 && month !== 12 && grade < 60 && month !== 5) {
+					console.log('Можна виправити оцінку.')
+				} else
+					console.log('Ви не можете виправити оцінку')
+			} catch(err) {
+				if(err instanceof IsANumber || err instanceof IsFrom1To12 || err instanceof IsAHoliday || err instanceof CheckGrade)
+					console.log(`Помилка: ${err.message}`);
+				else throw err
+
+			}
+		}
+
+
+		//  Вивести чи зможе він виправити оцінку(якщо оцінка погана і це не останній місяць у семестрі).
+		//  Обробку усіх помилок зробити з використанням відповідних класів.
+
+		checkGrade(grade, month)
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<style>
+	form{
+		display: flex;
+		flex-direction: column;
+	}
+</style>
+<form>
+	<label>
+		Вік
+		<input type="number">
+	</label>
+	<label>
+		Зріст
+		<input type="number">
+	</label>
+	<label>
+		Вага
+		<input type="number">
+	</label>
+	<label>
+		Заробітна плата
+		<input type="number">
+	</label>
+	<label>
+		Стаж
+		<input type="number">
+	</label>
+	<label>
+		Номер відділу
+		<input type="number">
+	</label>
+	<label>
+		Порядковий номер
+		<input type="number">
+	</label>
+</form>
+
+<body>
+	<script>
+		function onFormClick() {
+			const form = document.querySelector('form') //вибираємо селектором форму
+			form.addEventListener('click', function (event) {
+				if(event.target.tagName === 'INPUT') event.target.value = '0'
+			})
+		}
+		onFormClick()
+	</script>
+</body>
+
+</html>
