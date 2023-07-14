@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<input type="color" id="inpId">
+	<span id="counter">0</span>
+	<script>
+		// Задача 11. Користувач може змінювати колір фону, що вибирає користувач з використанням
+		// <input type="color">.
+		// Зберігати цей колір і відновлювати при наступному відкритті. 
+		//Також зберігати і відображати кількість змін протягом одного сеансу.
+		// let colorInput = document.querySelector('#inpId');
+
+		// if(localStorage.getItem('backgroundColor')) {
+		// 	document.body.style.backgroundColor = localStorage.getItem('backgroundColor')
+		// }
+
+		// let counter = 0
+
+		// colorInput.addEventListener('input', () => {
+		// 	document.body.style.backgroundColor = colorInput.value
+		// 	localStorage.setItem('backgroundColor', colorInput.value)
+		// 	counter++
+		// 	document.getElementById('counter').textContent = counter
+		// })
+
+
+		// Задача 12. Зберігати у пам’яті список справ, які користувачу треба виконати (зберігати у localStorage).
+		//  Періодично випадковим чином вибирати якусь з справ і виводити користувачу (з використанням confirm). 
+		//  Якщо користувач натискає на «Ок», то видаляти цю задачу.
+
+		let tasks = [
+			'Task 1',
+			'Task 2',
+			'Task 3',
+			'Task 4'
+		]
+
+		sessionStorage.setItem('tasks', JSON.stringify(tasks))
+
+		function showTask() {
+			if(tasks.length === 0) {
+				alert('No tasks')
+			}
+			else {
+				setTimeout(() => {
+					showTask()
+				}, 1000)
+			}
+		}
+
+		const randInd = Math.floor(Math.random() * tasks.length)
+		let randTask = tasks[randInd]
+
+		const res = confirm(randTask)
+
+		if(res) {
+			tasks.splice(randInd, 1)
+			sessionStorage.setItem('tasks', JSON.stringify(tasks))
+		}
+
+		showTask()
+	</script>
+</body>
+
+</html>

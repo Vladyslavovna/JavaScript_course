@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<script>
+		// 		Задача 5. Дано список з віком учнів. Підрахувати скільки разів кожне значення зустрічається у списку і максимальне.
+
+		// let studentsAges = [
+		// 	10,
+		// 	11,
+		// 	10,
+		// 	23,
+		// 	12,
+		// 	12,
+		// 	11,
+		// 	10,
+		// 	54
+		// ]
+
+		// let map = new Map()
+		// for(const el of studentsAges) {
+		// 	let elCount = map.get(el) || 0
+		// 	map.set(el, elCount + 1)
+		// }
+
+		// console.log(map)
+
+		// let maxAge = studentsAges.reduce((maxVal, currentVal) => {
+		// 	return Math.max(maxVal, currentVal)
+		// })
+
+		// console.log(maxAge);
+
+
+
+		// Задача 6.  Дано масив книг (назва, рік видання, автор). Підрахувати кількість книг для кожного автора.
+
+		// let books = [
+		// 	{ title: 'Book 1', year: 2000, author: 'Author 1' },
+		// 	{ title: 'Book 2', year: 2005, author: 'Author 2' },
+		// 	{ title: 'Book 3', year: 2010, author: 'Author 3' },
+		// 	{ title: 'Book 4', year: 2010, author: 'Author 3' },
+
+		// ]
+
+		// let map = new Map()
+
+		// for(const book of books) {
+		// 	let bookCount = map.get(book.author) || 0
+		// 	map.set(book.author, bookCount + 1)
+		// }
+		// console.log(map);
+
+		// Задача 7. Дано інформацію про відвідувачів деякого сайту (для кожного відвідувача зберігається логін). Підрахувати для кожного клієнта кількість відвідувань.
+
+		// let info = [
+		// 	{ login: 'user1' },
+		// 	{ login: 'user2' },
+		// 	{ login: 'user3' },
+		// 	{ login: 'user1' },
+		// 	{ login: 'user2' },
+		// 	{ login: 'user3' },
+		// 	{ login: 'user1' },
+		// 	{ login: 'user2' },
+		// 	{ login: 'user3' },
+		// 	{ login: 'user1' },
+		// 	{ login: 'user2' },
+		// 	{ login: 'user4' },
+		// ]
+
+		// const map = new Map()
+
+		// for(const visitor of info) {
+		// 	let visitCount = map.get(visitor.login) || 0
+		// 	map.set(visitor.login, visitCount + 1)
+		// }
+
+		// console.log(map);
+
+		// Задача 8. Дано масив студентів (піб, курс, факультет). Підрахувати кількість різних факультетів, та кількість студентів кожного з курсів.
+		// let students = [
+		// 	{ name: 'Student 1', course: 1, faculty: 'Faculty 1' },
+		// 	{ name: 'Student 2', course: 2, faculty: 'Faculty 2' },
+		// 	{ name: 'Student 3', course: 3, faculty: 'Faculty 3' },
+		// 	{ name: 'Student 4', course: 3, faculty: 'Faculty 4' },
+		// ]
+
+		// const set = new Set()
+		// for(const student of students) {
+		// 	if(!set.has(student.faculty)) {
+		// 		set.add(student.faculty)
+		// 	}
+		// }
+
+		// console.log(`${set.size} різних факультетів`);
+
+		// const map = new Map()
+		// for(const courses of students) {
+		// 	let courseCount = map.get(courses.course) || 0
+		// 	map.set(courses.course, courseCount + 1)
+		// }
+
+		// console.log(map)
+		// Задача 9. Дано масив показів температур. Підрахувати кількість входжень кожного із показів
+		// Заокруглити вверх значення та підрахувати кількість різних показів.
+
+		// let temperatures = [12.4, 24.9, 10.6, 12.4, 24.9, 12.4, 10.6, 11.9]
+
+		// let newTemp = temperatures.map((el) => {
+		// 	return Math.ceil(el)
+		// })
+
+		// console.log(newTemp)
+
+		// const set = new Set(newTemp)
+		// console.log(`${set.size} різних показів`)
+
+
+		// Задача 10 Дано два списки прізвищ студентів, що відвідують гуртки з математики і історії.
+		//  Підрахувати скільки студентів з гуртка з історії також відвідують гурток з математики.
+		//  Також підрахувати скільки всього студентів відвідують хоча б один гурток.
+
+		// let mathClubStudents = new Set(['Smith', 'Johnson', 'Williams', 'Brown', 'Davis', 'Wilson', 'Anderson'])
+		// let historyClubStudents = new Set(['Davis', 'Miller', 'Wilson', 'Anderson'])
+
+		// let bothClubs = new Set([...mathClubStudents].filter(student => historyClubStudents.has(student)))
+		// console.log(`${bothClubs.size} відвідують обидва гуртки`)
+
+		// let allStudents = new Set([...mathClubStudents, ...historyClubStudents])
+		// console.log(`${allStudents.size} відвідують гуртки`)
+	</script>
+</body>
+
+</html>

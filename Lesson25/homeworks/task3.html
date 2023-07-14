@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<script>
+		//Створити генератор, який би випадковим чином поступово генерував вказану кількість парних чисел.
+
+		function getRandomNum(min, max) {
+			return Math.floor(Math.random() * (max - min * 1))
+		}
+
+		let amountOfNum = prompt('Кількість чисел')
+		function* generator(amount) {
+			for(let i = 0; i < amount; i++) {
+				let num = getRandomNum(1, 30)
+				if(num % 2 === 0) {
+					yield num
+				} else {
+					i--
+				}
+			}
+		}
+
+		let generate = generator(amountOfNum)
+
+
+		function printNumber() {
+			let { value, done } = generate.next();
+			if(!done) {
+				console.log(value);
+				setTimeout(printNumber, 3000);
+			}
+		}
+
+		printNumber();
+
+
+	</script>
+</body>
+
+</html>

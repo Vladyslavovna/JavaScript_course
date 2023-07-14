@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<style>
+	img {
+		width: 500px;
+		height: 500px;
+	}
+
+	.container {
+		margin: 0 auto;
+		width: 1000px;
+		display: flex;
+		flex-direction: column;
+		text-align: center;
+		justify-content: center;
+		padding: 50px;
+		border: 1px solid black;
+	}
+	#fact-container{
+		font-size: large;
+	}
+</style>
+<div class="container">
+	<button id="button" onclick="loadData()">Згенерувати</button>
+	<div id="image-container"></div>
+	<div id="fact-container"></div>
+</div>
+
+<body>
+	<script>
+		async function loadData() {
+			fetch('https://cataas.com/cat')
+				.then(response => response.blob())
+				.then(blob => {
+					let catImage = document.getElementById('image-container')
+					let imageUrl = URL.createObjectURL(blob)
+					catImage.innerHTML = '<img src="' + imageUrl + '" alt="Котик">'
+				})
+
+			fetch('https://meowfacts.herokuapp.com/?lang=ukr')
+				.then(response => response.json())
+				.then(data => {
+					let textContainer = document.getElementById('fact-container')
+					textContainer.innerHTML = data.data[0]
+				})
+		}
+
+
+	</script>
+</body>
+
+</html>

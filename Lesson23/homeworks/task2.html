@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+	<h2>Все в консолі</h2>
+	<script>
+		// Задача 1. Дано масив рядків. Вивести ті, у яких є цифри (використати метод test та регулярні вирази).
+		// let array = ["Hello", "World", "123", "Codeium21", "Mama", 'Oll1']
+		// let res = []
+		// for(let num of array) {
+		// 	if((/\d/g).test(num)) res.push(num)
+		// }
+		// console.log(res)
+
+		//Задача 2. Дано масив рядків. Вивести ті, у яких немає цифр.
+		// let array = ["Hello", "World", "123", "Codeium21", "Mama", 'Oll1']
+
+		// let res = []
+		// for(let i of array) {
+		// 	if((/^\D*$/g).test(i)) res.push(i)
+		// }                                  // ^ - початок рядка.
+		// \D - будь-який символ, який не є цифрою.
+		// * - повторення попереднього символу (в даному випадку \D) нуль або більше разів.
+		// $ - кінець рядка.
+		// g - флаг глобального пошуку, що означає, що пошук буде проводитися для всіх можливих входжень регулярного виразу в рядку.
+		//console.log(res)
+
+
+		// Задача 3. Дано масив рядків. Вивести ті, у яких є голосні літери.
+
+		// let array = ["Hello", "World", "123", "Codeium21", "Mama", 'Oll1']
+		// let res = []
+
+		// for(let i of array) {
+		// 	if((/[aeoiuy]/).test(i)) res.push(i)
+		// }
+
+		// console.log(res)
+
+
+		// Задача 4. Дано масив рядків. Вивести ті, у яких немає голосних літер.
+		// let array = ["Hello", "World", "123", "Codeium21", "Mama", 'Oll1', 'Drrr']
+		// let res = []
+		// for(let i of array) {
+		// 	if((/^[^aeoiuy]*$/).test(i)) res.push(i)       // ^ - початок рядка. Цей символ вказує, що шуканий патерн повинен відповідати відразу після початку рядка.
+		// [^aeoiuy] - вказує на будь-який символ, крім голосних літер a, e, o, i, u, y.
+		// Символ ^ всередині квадратних дужок негативний, він означає, що шукаємо будь-який символ, крім тих, що перераховані.
+		// * - повторення попереднього символу (в даному випадку [^aeoiuy]) нуль або більше разів. Це дозволяє розпізнавати рядки, що складаються з одного або більше неголосних символів.
+		// $ - кінець рядка. Цей символ вказує, що шуканий патерн повинен закінчуватись на останній символ рядка.
+		// }
+		// console.log(res)
+
+
+		// Задача 5. Дано масив рядків. Вивести ті, у яких є або цифра 1 або цифра 3.
+		// let array = ["Hello", "World", "123", "Codeium21", "Mama", 'Oll1', '32123']
+		// let res = []
+		// for(let i of array) {
+		// 	if(/1|3/.test(i)) res.push(i)
+		// }
+		// console.log(res)
+
+		// Задача 6. Дано рядок тексту, вивести усі числа, які є у тексті.
+		// let string = 'Hello world! I`m 23 years old.I live in the city. 23 000 people live here. It`s 2023 year now'
+		// console.log(string.match(/\d/g))
+
+		// Задача 7. Дано рядок тексту. Знайти усі знаки пунктуації, які були використано.
+		// let string = 'Hello world! I`m 23 years old.I live in the city. 23 000 people live here. It`s 2023 year now'
+		// console.log(string.match(/\W/g))
+
+		// Задача 8. Дано рядок тексту. Вивести усі складові, які розділені розділовими знаками.
+		// let string = 'Hello world! I`m 23 years old.I live in the city. 23 000 people live here. It`s 2023 year now'
+		// console.log(string.split(/[.!?]+/))
+
+
+
+		// Задача 9. Дано рядок тексту. Перевірити, чи містить він дату у форматі dd.mm.yyyy (dd- день, mm- місяць, yyyy- рік).
+		// let string = 'Hello world! I`m 23 years old.I live in the city. 23 000 people live here. It`s 12.03.2023 year now'
+		// console.log(/\d{2}\.\d{2}\.\d+/.test(string))
+
+		// Задача 10. Дано рядок тексту. Підрахувати кількість двоцифрових чисел у рядку.
+		// let string = 'Hello world! I`m 23 years old.I live in the city. 23 000 people live here. It`s 12.03.2023 year now'
+		// console.log(string.match(/\d{2}/g))
+
+		// Задача 11. Визначити чи може бути рядок тексту номером банківської картки (приклад: «4142-3433-2323-3434»). Знайти усі такі номери.
+		// let string = 'I have a mono bank account.I have a credit card there. It`s number is 4141-4152-9342-2312'
+		// console.log((/\d{4}\-\d{4}\-\d{4}\-\d+/).test(string))
+		// console.log(string.match(/\d{4}\-\d{4}\-\d{4}\-\d+/g))
+		// Задача 12. Дано адресу сайту. Визначити, чи є він урядовим (містить домен “gov”)
+		// let url = 'https://test.test.gov'
+		// if(url.includes('gov')) console.log('Урядовий'); else console.log('Не урядовий')
+		// Задача 13. Вибрати усі роки після 2021 року з отриманого повідомлення
+
+		// let sting = prompt('Введіть повідомлення')
+
+		// let exp = sting.toString().match(/\d{4}/g)
+
+		// let res = []
+
+		// for(let year of exp) {
+		// 	year > 2021 ? res.push(year) : null
+		// }
+
+		// console.log(res);
+
+		// Задача 14. Дано номер телефону. Перевірити, чи є цей телефон телефоном з України (починаєтсья на «+38»)
+		// let number = '+38 099 999 99 99'
+		// number.startsWith('+38') ? console.log('Телефон з України') : console.log('Телефон не з України')
+
+		// Задача 15. Користувач вводить прізвище та ім’я в одному рядку через пробіл.  Замінити пробіл на дефіс.
+		// let sting = prompt('Введіть повідомлення')
+
+		// sting = sting.replace(/\s/, '-')
+		// console.log(sting)
+		// Задача 16. Користувач вводить дату у форматі «день.місяць.рік». Отримати рядкове представлення дати у форматі «день/місяць/рік»
+		// let string = prompt('Введіть дату')
+
+		// let newString = string.replace(/\./g, '/')
+		// console.log(newString)
+		// Задача 17. Користувач вводить день (номер дня (0-6) або «sun,mon,tue,wed,thu,fri,sat»). Визначити, чи  є це день вихідним
+
+		
+		// let message = prompt('Введіть день')
+
+		// if(/0|6|sun|sat/.test(message)) {
+		// 	console.log('День вихідний');
+		// } else {
+		// 	console.log('День не вихідний');
+		// }
+
+
+
+	</script>
+</body>
+
+</html>

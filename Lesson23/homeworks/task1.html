@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+
+<body>
+
+	<script>
+		// Задача 1. Користувач іде у відпустку на 56 днів. Визначити дату на момент його повернення. 
+
+		// function getExpirationDate(date, days) {
+		// 	return new Date(date.setDate(date.getDate() + days))
+		// }
+		// const holiday = 56
+		// const currentDate = new Date()
+		// const expirationDate = getExpirationDate(currentDate, holiday)
+		// alert(expirationDate)
+
+		//============================
+
+		// Задача 2 .Дано дата виробництва йогурта(вводимо рік, місяць, день) та кількість днів придатності.
+		// Визначити чи є він придатним на даний момент.
+
+		// const userDay = parseInt(prompt('День'))
+		// const userMonth = parseInt(prompt('Місяць'))
+		// const userYear = parseInt(prompt('Рік'))
+		// const expDate = parseInt(prompt('Строк придатності'))
+
+		// const productDate = new Date(userYear, userMonth - 1, userDay)
+		// const currentDate = new Date()
+		// productDate.setDate(productDate.getDate() + expDate)
+
+		// if(productDate < currentDate) {
+		// 	alert('Він не придатний')
+		// } else {
+		// 	alert('Він придатний')
+		// }
+
+		//==========================
+
+		// Задача 3. Сформувати масив з 1000 елементів від 1 до 800. Порівняти час сортування бульбашкою і  вставкою.
+		// const startDate = Date.now()
+		// function getArr() {
+		// 	let arr = []
+		// 	for(let i = 0; i < 1000; i++) {
+		// 		let randomNum = Math.floor(Math.random() * 800)
+		// 		arr.push(randomNum)
+		// 	}
+		// 	return arr
+		// }
+		// function bubbleSort(array) {
+		// 	for(let i = 0; i < array.length; i++) {
+		// 		for(let j = 0; j < array.length - i; j++) {
+		// 			if(array[j] > array[j + 1]) {
+		// 				let tmp = array[j]
+		// 				array[j] = array[j + 1]
+		// 				array[j + 1] = tmp
+		// 			}
+		// 		}
+		// 	}
+		// 	return array
+		// }
+
+		// function insertSort(array) {
+		// 	for(let i = 0; i < array.length; i++) {
+		// 		let key = array[i]
+		// 		let j = i - 1
+		// 		while(j >= 0 && array[j] > key) {
+		// 			array[j + 1] = array[j]
+		// 			j--
+		// 		}
+		// 		array[j + 1] = key
+		// 	}
+		// 	return array
+		// }
+		// let ar1 = getArr()
+		// insertSort(ar1)
+
+		// const endTime = Date.now()
+
+		// const time = endTime - startDate
+
+		// console.log(`time: ${time} ms`)
+
+		//==========================================
+		// Задача 4. Задаємо користувачу задачу з додавання двох чисел.
+		// Визначити скільки секунд було використано для розв’язання задачі.
+
+		// const startDate = Date.now()
+		// function getRandNum() {
+		// 	return Math.floor(Math.random() * 10)
+		// }
+		// let firstNumber = getRandNum()
+		// let secondNumber = getRandNum()
+
+		// const userAnswer = prompt(`${firstNumber} + ${secondNumber} ?`)
+
+
+		// const endTime = Date.now()
+
+		// const time = endTime - startDate
+
+		// console.log(`Час виконання ${time} мс`)
+
+	</script>
+</body>
+
+</html>
